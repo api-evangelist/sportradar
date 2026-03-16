@@ -1,15 +1,45 @@
-name: sportradar
-description: Needs a description.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json-icons/apis-json.png
-url: https://example.com/apis/apis.yml
-type: Contract
+aid: sportradar
+name: Sportradar
+description: >-
+  Sportradar provides comprehensive sports data APIs delivering real-time
+  scores, statistics, odds, and content for over 80 sports and 500 leagues
+  worldwide for media, gaming, and sports technology companies.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/sportradar/refs/heads/main/apis.yml
 created: '2024-12-25'
-modified: '2024-12-25'
-specificationVersion: '0.18'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 tags:
-  - Tag
-apis: []
-common: []
+  - Sports
+  - Sports Data
+  - Statistics
+apis:
+  - aid: sportradar:sports-data-api
+    name: Sportradar Sports Data API
+    description: >-
+      Comprehensive sports data API providing real-time scores, statistics,
+      odds, and content covering 80+ sports, 500+ leagues, and 750,000+
+      annual events in JSON and XML formats.
+    humanURL: https://developer.sportradar.com/
+    tags:
+      - Sports
+      - Statistics
+      - Real-time
+    properties:
+      - type: Documentation
+        url: https://developer.sportradar.com/docs/read/Home
+      - type: Getting Started
+        url: https://developer.sportradar.com/getting-started/docs/get-started
+common:
+  - type: Portal
+    url: https://developer.sportradar.com/
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: Getting Started
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Website
+    url: https://sportradar.com/
 maintainers:
-  - FN: API Evangelist
-    email: info@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
