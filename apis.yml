@@ -23,9 +23,9 @@ apis:
       annual events in JSON and XML formats.
     humanURL: https://developer.sportradar.com/
     tags:
+      - Real-Time
       - Sports
       - Statistics
-      - Real-time
     properties:
       - type: Documentation
         url: https://developer.sportradar.com/docs/read/Home
