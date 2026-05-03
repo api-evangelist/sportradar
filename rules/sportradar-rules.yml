@@ -1,0 +1,108 @@
+extends: [[spectral:oas, recommended]]
+
+rules:
+  sportradar-operation-id-required:
+    description: All operations must have an operationId.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete,head,options]"
+    then:
+      field: operationId
+      function: truthy
+
+  sportradar-operation-id-verb-prefix:
+    description: operationId must start with a standard REST verb (get, list, create, update, delete).
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(get|list|create|update|delete)[A-Z][a-zA-Z0-9]+$"
+
+  sportradar-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 /-]+$"
+
+  sportradar-tags-required:
+    description: Every operation must have at least one tag.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  sportradar-api-key-auth-required:
+    description: API must define apiKey security scheme.
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: apiKey
+      function: truthy
+
+  sportradar-response-200-required:
+    description: Every operation must define a 200 success response.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["200"]
+
+  sportradar-401-response-required:
+    description: Every operation must define a 401 Unauthorized response.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["401"]
+
+  sportradar-429-rate-limit-response:
+    description: Every operation should define a 429 Too Many Requests response.
+    severity: info
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["429"]
+
+  sportradar-path-sport-prefix:
+    description: Paths should include sport or competition prefix (e.g., /nba/, /nfl/, /soccer/).
+    severity: info
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/(nba|nfl|nhl|mlb|soccer|tennis|golf|esports|mma|cricket|rugby)"
+
+  sportradar-json-response-suffix:
+    description: Sportradar endpoints use .json suffix for JSON responses.
+    severity: info
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "\\.json$"
+
+  sportradar-servers-required:
+    description: The API must define at least one server.
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy
+
+  sportradar-info-contact-required:
+    description: The info object must include a contact entry.
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy

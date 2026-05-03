@@ -1,0 +1,171 @@
+name: Sportradar Vocabulary
+description: >-
+  Normative vocabulary for Sportradar sports data APIs. Covers the core data
+  model, identifiers, sports-specific terminology, and API conventions used
+  across Sportradar's data products for media, betting, and sports technology.
+version: "1.0"
+created: "2026-05-02"
+modified: "2026-05-02"
+terms:
+  - term: Sport Event
+    definition: >-
+      The fundamental Sportradar data entity representing any competitive
+      sports contest: an NBA game, soccer match, NFL game, tennis match, or
+      any other competition. Identified by a Sportradar URN in the format
+      sr:match:{id} or sr:game:{id}.
+    tags:
+      - Core
+      - Data Model
+
+  - term: Sportradar URN
+    definition: >-
+      Sportradar's Uniform Resource Name scheme for uniquely identifying
+      entities. Format: sr:{entity_type}:{id}. Examples: sr:match:12345678,
+      sr:competitor:44, sr:tournament:17, sr:venue:1513.
+    tags:
+      - Core
+      - Identifiers
+
+  - term: Competitor
+    definition: >-
+      A team or individual player participating in a sport event. In team
+      sports this is a club or national team; in individual sports it is a
+      player. Identified by sr:competitor:{id}.
+    tags:
+      - Core
+      - Data Model
+
+  - term: Tournament
+    definition: >-
+      A sports competition or league that organizes sport events. Includes
+      domestic leagues (Premier League, NBA), cup competitions (Champions League,
+      FA Cup), and international tournaments (World Cup, Olympics).
+      Identified by sr:tournament:{id} or sr:competition:{id}.
+    tags:
+      - Competition
+      - Data Model
+
+  - term: Season
+    definition: >-
+      A temporal division of a tournament representing one competitive campaign.
+      Seasons have start and end dates and a year label. Identified by sr:season:{id}.
+    tags:
+      - Competition
+      - Data Model
+
+  - term: Qualifier
+    definition: >-
+      The role of a competitor in a sport event: home (playing on home turf)
+      or away. Used in the competitors array to indicate which team is the
+      home team and which is the away team.
+    tags:
+      - Data Model
+      - Sports
+
+  - term: Sport Event Status
+    definition: >-
+      The current state of a sport event. Common values: not_started (before
+      the event begins), live (currently in progress), ended (completed but
+      not yet official), closed (official final result confirmed), cancelled,
+      postponed, abandoned.
+    tags:
+      - Data Model
+      - Real-Time
+
+  - term: Play-by-Play
+    definition: >-
+      Granular event-level data describing individual actions within a game
+      (scoring plays, shots, fouls, passes, tackles). Available for select
+      sports and coverage levels via dedicated timeline/play-by-play endpoints.
+    tags:
+      - Data
+      - Real-Time
+
+  - term: Coverage
+    definition: >-
+      The level of data detail Sportradar provides for a sport event. Live
+      coverage includes real-time play-by-play and live statistics. Basic
+      coverage includes schedules and final scores only.
+    tags:
+      - Data
+      - Quality
+
+  - term: API Key
+    definition: >-
+      The authentication credential required for all Sportradar API calls.
+      Passed as the api_key query parameter. Obtained through the Sportradar
+      developer portal and tied to specific sport packages and rate limits.
+    tags:
+      - Authentication
+      - API
+
+  - term: Venue
+    definition: >-
+      The physical location where a sport event takes place (stadium, arena,
+      court). Includes name, city, country, and capacity. Identified by sr:venue:{id}.
+    tags:
+      - Data Model
+      - Location
+
+  - term: Box Score
+    definition: >-
+      A statistical summary of a completed game showing individual and team
+      performance numbers (points, rebounds, assists for basketball; goals,
+      shots, possession for soccer; passing yards, rushing yards for football).
+    tags:
+      - Statistics
+      - Data
+
+  - term: Standings
+    definition: >-
+      The ranked list of teams in a league or tournament by their current
+      win-loss record and points. Includes conference and division standings
+      for multi-division leagues like the NBA and NFL.
+    tags:
+      - Statistics
+      - Competition
+
+  - term: Odds
+    definition: >-
+      Betting odds from sportsbooks representing the implied probability of
+      outcomes. Sportradar's Odds Comparison API aggregates pre-match and
+      live odds across multiple bookmakers.
+    tags:
+      - Betting
+      - Data
+
+  - term: Live Feed
+    definition: >-
+      A real-time data stream delivering sport event updates as they happen,
+      including score changes, game clock updates, and play-by-play events.
+      Sportradar offers live feeds via REST polling and streaming protocols.
+    tags:
+      - Real-Time
+      - Data
+
+  - term: Player Profile
+    definition: >-
+      Biographical and statistical information about an individual athlete,
+      including date of birth, nationality, position, jersey number, height,
+      weight, and season statistics.
+    tags:
+      - Data Model
+      - Statistics
+
+  - term: Schedule
+    definition: >-
+      A list of sport events organized by date, showing upcoming and recently
+      completed games for a sport or competition. Includes home/away matchups,
+      venue, and scheduled start times.
+    tags:
+      - Data
+      - Planning
+
+  - term: Incident
+    definition: >-
+      A specific event occurring during a match that changes the game state,
+      such as a goal, red card, yellow card, penalty, substitution, or injury
+      time-out. Incidents appear in match timelines.
+    tags:
+      - Real-Time
+      - Data

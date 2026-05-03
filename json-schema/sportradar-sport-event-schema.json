@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.sportradar.com/schemas/sport-event.json",
+  "title": "Sportradar Sport Event",
+  "description": "Schema for a Sportradar sport event representing a scheduled or completed game, match, or competition across any sport. Sport events are the fundamental data entity in Sportradar's API, identified by a Sportradar URN (e.g., sr:match:12345).",
+  "type": "object",
+  "required": ["id", "scheduled", "competitors"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar URN identifier for the sport event in the format sr:match:{id} or sr:game:{id}.",
+      "pattern": "^sr:(match|game|stage|season):[0-9]+$",
+      "example": "sr:match:12345678"
+    },
+    "scheduled": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled start time of the sport event in ISO 8601 format (UTC)."
+    },
+    "start_time_confirmed": {
+      "type": "boolean",
+      "description": "Whether the scheduled start time has been officially confirmed."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the sport event.",
+      "enum": [
+        "not_started",
+        "live",
+        "ended",
+        "closed",
+        "cancelled",
+        "postponed",
+        "interrupted",
+        "abandoned",
+        "delayed",
+        "unknown"
+      ]
+    },
+    "competitors": {
+      "type": "array",
+      "description": "List of teams or players competing in the sport event.",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/Competitor"
+      }
+    },
+    "tournament": {
+      "$ref": "#/$defs/Tournament",
+      "description": "The tournament or league this event belongs to."
+    },
+    "season": {
+      "$ref": "#/$defs/Season",
+      "description": "The season this event is part of."
+    },
+    "round": {
+      "type": "object",
+      "description": "Round information for tournament or league play.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of round (e.g., group, round_of_16, final)."
+        },
+        "number": {
+          "type": "integer",
+          "description": "Round number within the competition."
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable round name."
+        }
+      }
+    },
+    "venue": {
+      "$ref": "#/$defs/Venue",
+      "description": "The venue where the sport event takes place."
+    },
+    "coverage": {
+      "type": "object",
+      "description": "Coverage information for the sport event.",
+      "properties": {
+        "live": {
+          "type": "boolean",
+          "description": "Whether live coverage is provided."
+        },
+        "type": {
+          "type": "string",
+          "description": "Coverage type (e.g., sportradar, basic)."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Competitor": {
+      "type": "object",
+      "title": "Competitor",
+      "description": "A team or player participating in a sport event.",
+      "required": ["id", "name", "qualifier"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Sportradar competitor URN (e.g., sr:competitor:12345 or sr:team:12345).",
+          "pattern": "^sr:(competitor|team|player):[0-9]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Competitor name (team or player full name)."
+        },
+        "abbreviation": {
+          "type": "string",
+          "description": "Short abbreviation for the competitor (e.g., LAL for Los Angeles Lakers).",
+          "maxLength": 10
+        },
+        "qualifier": {
+          "type": "string",
+          "description": "Role in the event: home team/player or away team/player.",
+          "enum": ["home", "away"]
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of the competitor."
+        },
+        "country_code": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code.",
+          "pattern": "^[A-Z]{2,3}$"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Gender of the competitor or team (male, female, mixed).",
+          "enum": ["male", "female", "mixed"]
+        }
+      }
+    },
+    "Tournament": {
+      "type": "object",
+      "title": "Tournament",
+      "description": "A sports tournament or league competition.",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Sportradar tournament/competition URN.",
+          "pattern": "^sr:(tournament|competition|season):[0-9]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Tournament or competition name (e.g., NBA, Premier League)."
+        },
+        "sport": {
+          "type": "object",
+          "description": "The sport this tournament belongs to.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Sportradar sport identifier."
+            },
+            "name": {
+              "type": "string",
+              "description": "Sport name (e.g., Basketball, Soccer, Football)."
+            }
+          }
+        },
+        "category": {
+          "type": "object",
+          "description": "Geographic or organizational category.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Category identifier."
+            },
+            "name": {
+              "type": "string",
+              "description": "Category name (e.g., USA, England, International)."
+            }
+          }
+        }
+      }
+    },
+    "Season": {
+      "type": "object",
+      "title": "Season",
+      "description": "A competition season or campaign.",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Sportradar season URN."
+        },
+        "name": {
+          "type": "string",
+          "description": "Season name or label (e.g., NBA 2024/2025)."
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Season start date."
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Season end date."
+        },
+        "year": {
+          "type": "string",
+          "description": "Season year label (e.g., 2024, 2024/2025)."
+        }
+      }
+    },
+    "Venue": {
+      "type": "object",
+      "title": "Venue",
+      "description": "A sports venue where events take place.",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Sportradar venue URN.",
+          "pattern": "^sr:venue:[0-9]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Venue name (e.g., Madison Square Garden)."
+        },
+        "city": {
+          "type": "string",
+          "description": "City where the venue is located."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country where the venue is located."
+        },
+        "country_code": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 or alpha-3 country code.",
+          "pattern": "^[A-Z]{2,3}$"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "Seating capacity of the venue.",
+          "minimum": 0
+        },
+        "map_coordinates": {
+          "type": "string",
+          "description": "Geographic coordinates in 'latitude,longitude' format."
+        }
+      }
+    }
+  }
+}

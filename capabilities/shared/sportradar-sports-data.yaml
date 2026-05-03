@@ -1,0 +1,314 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Sportradar Sports Data API"
+  description: >-
+    Sportradar sports data API providing real-time scores, schedules, standings,
+    player profiles, and match summaries across NBA, NFL, and soccer competitions.
+  tags:
+    - Sports
+    - Sports Data
+    - Real-Time
+    - Statistics
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SPORTRADAR_API_KEY: SPORTRADAR_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: sportradar-data
+      baseUri: "https://api.sportradar.com"
+      description: "Sportradar Sports Data API."
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{SPORTRADAR_API_KEY}}"
+        placement: query
+      resources:
+        - name: nba-schedules
+          path: /nba/trial/v8/en/games/{date}/schedule.json
+          description: "NBA daily schedule."
+          operations:
+            - name: get-nba-daily-schedule
+              method: GET
+              description: "Retrieve the NBA game schedule for a specific date."
+              inputParameters:
+                - name: date
+                  in: path
+                  type: string
+                  required: true
+                  description: "Date in YYYY/MM/DD format."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nba-games
+          path: /nba/trial/v8/en/games/{game_id}/summary.json
+          description: "NBA game summaries."
+          operations:
+            - name: get-nba-game-summary
+              method: GET
+              description: "Retrieve a complete NBA game summary including box score and statistics."
+              inputParameters:
+                - name: game_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique NBA game identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nba-standings
+          path: /nba/trial/v8/en/seasons/{season_year}/REG/standings.json
+          description: "NBA standings."
+          operations:
+            - name: get-nba-standings
+              method: GET
+              description: "Retrieve current NBA standings for the specified season."
+              inputParameters:
+                - name: season_year
+                  in: path
+                  type: string
+                  required: true
+                  description: "Season year (e.g., 2024)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nba-players
+          path: /nba/trial/v8/en/players/{player_id}/profile.json
+          description: "NBA player profiles."
+          operations:
+            - name: get-nba-player-profile
+              method: GET
+              description: "Retrieve biographical and statistical profile for an NBA player."
+              inputParameters:
+                - name: player_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique Sportradar player identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nfl-games
+          path: /nfl/trial/v7/en/games/{game_id}/summary.json
+          description: "NFL game summaries."
+          operations:
+            - name: get-nfl-game-summary
+              method: GET
+              description: "Retrieve a complete NFL game summary including drives and statistics."
+              inputParameters:
+                - name: game_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique NFL game identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: soccer-competitions
+          path: /soccer-t3/trial/v4/en/competitions/{competition_id}/info.json
+          description: "Soccer competition information."
+          operations:
+            - name: get-soccer-competition-info
+              method: GET
+              description: "Retrieve information about a soccer competition."
+              inputParameters:
+                - name: competition_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Competition URN (e.g., sr:competition:17 for Premier League)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: soccer-matches
+          path: /soccer-t3/trial/v4/en/sport_events/{sport_event_id}/summary.json
+          description: "Soccer match summaries."
+          operations:
+            - name: get-soccer-match-summary
+              method: GET
+              description: "Retrieve a detailed soccer match summary including timeline and lineups."
+              inputParameters:
+                - name: sport_event_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Sport event URN (e.g., sr:match:12345)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8110
+      namespace: sportradar-data-rest
+      resources:
+        - path: /v1/nba/schedules/{date}
+          name: nba-schedules
+          description: "NBA daily schedules."
+          operations:
+            - method: GET
+              name: get-nba-daily-schedule
+              description: "Get the NBA schedule for a date."
+              call: "sportradar-data.get-nba-daily-schedule"
+              with:
+                date: "rest.date"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/nba/games/{game_id}
+          name: nba-games
+          description: "NBA game summaries."
+          operations:
+            - method: GET
+              name: get-nba-game-summary
+              description: "Get an NBA game summary."
+              call: "sportradar-data.get-nba-game-summary"
+              with:
+                game_id: "rest.game_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/nba/standings/{season_year}
+          name: nba-standings
+          description: "NBA standings."
+          operations:
+            - method: GET
+              name: get-nba-standings
+              description: "Get NBA standings for a season."
+              call: "sportradar-data.get-nba-standings"
+              with:
+                season_year: "rest.season_year"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/soccer/matches/{sport_event_id}
+          name: soccer-matches
+          description: "Soccer match summaries."
+          operations:
+            - method: GET
+              name: get-soccer-match-summary
+              description: "Get a soccer match summary."
+              call: "sportradar-data.get-soccer-match-summary"
+              with:
+                sport_event_id: "rest.sport_event_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9110
+      namespace: sportradar-data-mcp
+      transport: http
+      tools:
+        - name: get-nba-daily-schedule
+          description: "Retrieve the NBA game schedule for a specific date."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "sportradar-data.get-nba-daily-schedule"
+          with:
+            date: "tools.date"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-nba-game-summary
+          description: "Get complete NBA game summary with box score and statistics."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "sportradar-data.get-nba-game-summary"
+          with:
+            game_id: "tools.game_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-nba-standings
+          description: "Get current NBA league standings for a season."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "sportradar-data.get-nba-standings"
+          with:
+            season_year: "tools.season_year"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-nba-player-profile
+          description: "Retrieve player biography and career statistics for an NBA player."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "sportradar-data.get-nba-player-profile"
+          with:
+            player_id: "tools.player_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-nfl-game-summary
+          description: "Get complete NFL game summary with drives and player statistics."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "sportradar-data.get-nfl-game-summary"
+          with:
+            game_id: "tools.game_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-soccer-competition-info
+          description: "Get information about a soccer competition or league."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "sportradar-data.get-soccer-competition-info"
+          with:
+            competition_id: "tools.competition_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-soccer-match-summary
+          description: "Get detailed soccer match summary including timeline, lineups, and incidents."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "sportradar-data.get-soccer-match-summary"
+          with:
+            sport_event_id: "tools.sport_event_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

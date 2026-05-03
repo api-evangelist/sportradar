@@ -1,0 +1,53 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.sportradar.com/soccer-t3/trial/v4/en/sport_events/sr:match:12345678/summary.json?api_key={YOUR_API_KEY}",
+    "headers": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "sport_event": {
+        "id": "sr:match:12345678",
+        "scheduled": "2024-01-15T15:00:00+00:00",
+        "competitors": [
+          {
+            "id": "sr:competitor:44",
+            "name": "Manchester City",
+            "abbreviation": "MCI",
+            "qualifier": "home",
+            "country": "England",
+            "country_code": "ENG"
+          },
+          {
+            "id": "sr:competitor:50",
+            "name": "Arsenal",
+            "abbreviation": "ARS",
+            "qualifier": "away",
+            "country": "England",
+            "country_code": "ENG"
+          }
+        ],
+        "tournament": {
+          "id": "sr:tournament:17",
+          "name": "Premier League"
+        },
+        "venue": {
+          "id": "sr:venue:1513",
+          "name": "Etihad Stadium",
+          "city": "Manchester",
+          "country": "England"
+        }
+      },
+      "sport_event_status": {
+        "status": "ended",
+        "match_status": "ended",
+        "home_score": 2,
+        "away_score": 0
+      }
+    }
+  }
+}

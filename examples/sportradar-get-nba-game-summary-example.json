@@ -1,0 +1,37 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.sportradar.com/nba/trial/v8/en/games/1f3d2f8c-abc1-4567-89de-1234567890ab/summary.json?api_key={YOUR_API_KEY}",
+    "headers": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "1f3d2f8c-abc1-4567-89de-1234567890ab",
+      "status": "closed",
+      "scheduled": "2024-01-15T00:30:00+00:00",
+      "home": {
+        "id": "583ec825-fb46-11e1-82cb-f4ce4684ea4c",
+        "name": "Los Angeles Lakers",
+        "alias": "LAL",
+        "points": 112
+      },
+      "away": {
+        "id": "583ec5fd-fb46-11e1-82cb-f4ce4684ea4c",
+        "name": "Golden State Warriors",
+        "alias": "GSW",
+        "points": 105
+      },
+      "venue": {
+        "id": "sr:venue:12345",
+        "name": "Crypto.com Arena",
+        "city": "Los Angeles",
+        "country": "USA",
+        "capacity": 19068
+      }
+    }
+  }
+}

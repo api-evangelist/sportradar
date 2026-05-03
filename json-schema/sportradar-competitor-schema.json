@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.sportradar.com/schemas/competitor.json",
+  "title": "Sportradar Competitor",
+  "description": "Schema for a Sportradar competitor entity representing a sports team or individual player. Competitors are identified by Sportradar URNs and can represent teams in team sports or individual athletes in individual sports.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar URN for the competitor in the format sr:competitor:{id} or sr:team:{id}.",
+      "pattern": "^sr:(competitor|team|player):[0-9]+$",
+      "example": "sr:competitor:3421"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full official name of the team or player.",
+      "example": "Los Angeles Lakers"
+    },
+    "abbreviation": {
+      "type": "string",
+      "description": "Standard abbreviation for the competitor, typically 2-4 characters.",
+      "maxLength": 10,
+      "example": "LAL"
+    },
+    "short_name": {
+      "type": "string",
+      "description": "Short form of the competitor name for display in space-constrained contexts.",
+      "example": "Lakers"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country the competitor represents or is based in.",
+      "example": "USA"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 or alpha-3 country code.",
+      "pattern": "^[A-Z]{2,3}$",
+      "example": "USA"
+    },
+    "gender": {
+      "type": "string",
+      "description": "Gender classification of the team or player.",
+      "enum": ["male", "female", "mixed"]
+    },
+    "type": {
+      "type": "string",
+      "description": "Competitor type: team for team sports, player for individual sports.",
+      "enum": ["team", "player", "club"]
+    },
+    "category": {
+      "type": "object",
+      "description": "Organizational category the competitor belongs to.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Category identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Category name (e.g., NBA, Premier League)."
+        }
+      }
+    },
+    "sport": {
+      "type": "object",
+      "description": "The sport this competitor participates in.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Sportradar sport identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Sport name."
+        }
+      }
+    },
+    "players": {
+      "type": "array",
+      "description": "List of players on the team roster (for team competitors).",
+      "items": {
+        "$ref": "#/$defs/Player"
+      }
+    }
+  },
+  "$defs": {
+    "Player": {
+      "type": "object",
+      "title": "Player",
+      "description": "An individual player within a sports team or competing as an individual.",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Sportradar player URN.",
+          "pattern": "^sr:player:[0-9]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Player full name."
+        },
+        "date_of_birth": {
+          "type": "string",
+          "format": "date",
+          "description": "Player date of birth."
+        },
+        "nationality": {
+          "type": "string",
+          "description": "Player nationality."
+        },
+        "country_code": {
+          "type": "string",
+          "description": "ISO 3166-1 country code.",
+          "pattern": "^[A-Z]{2,3}$"
+        },
+        "height": {
+          "type": "integer",
+          "description": "Player height in centimeters.",
+          "minimum": 0
+        },
+        "weight": {
+          "type": "integer",
+          "description": "Player weight in kilograms.",
+          "minimum": 0
+        },
+        "jersey_number": {
+          "type": "string",
+          "description": "Player's jersey/shirt number."
+        },
+        "position": {
+          "type": "string",
+          "description": "Player's position (sport-specific, e.g., G, F, C for basketball; FW, MF, DF, GK for soccer)."
+        },
+        "starter": {
+          "type": "boolean",
+          "description": "Whether the player is in the starting lineup."
+        }
+      }
+    }
+  }
+}

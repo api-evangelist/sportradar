@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "sportradar": "https://developer.sportradar.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "SportEvent": "schema:SportsEvent",
+    "Competitor": "schema:SportsTeam",
+    "Player": "schema:Person",
+    "Venue": "schema:SportsActivityLocation",
+    "Tournament": "schema:SportsOrganization",
+    "Season": "schema:Event",
+
+    "id": "@id",
+    "name": "schema:name",
+    "abbreviation": "sportradar:abbreviation",
+    "shortName": "schema:alternateName",
+    "description": "schema:description",
+    "url": "schema:url",
+
+    "scheduled": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "startTimeConfirmed": "sportradar:startTimeConfirmed",
+    "status": "sportradar:eventStatus",
+
+    "competitors": {
+      "@id": "sportradar:hasCompetitor",
+      "@container": "@set"
+    },
+    "qualifier": "sportradar:qualifier",
+    "homeTeam": "schema:homeTeam",
+    "awayTeam": "schema:awayTeam",
+
+    "tournament": "sportradar:tournament",
+    "season": "sportradar:season",
+    "round": "sportradar:round",
+    "venue": "schema:location",
+
+    "country": "schema:addressCountry",
+    "countryCode": "schema:addressCountry",
+    "city": "schema:addressLocality",
+    "capacity": "sportradar:capacity",
+    "gender": "schema:gender",
+
+    "sport": "sportradar:sport",
+    "category": "sportradar:category",
+
+    "homeScore": "sportradar:homeScore",
+    "awayScore": "sportradar:awayScore",
+    "winPct": "sportradar:winPercentage",
+    "wins": "sportradar:wins",
+    "losses": "sportradar:losses",
+    "rank": "sportradar:rank",
+
+    "dateOfBirth": {
+      "@id": "schema:birthDate",
+      "@type": "xsd:date"
+    },
+    "nationality": "schema:nationality",
+    "height": "sportradar:height",
+    "weight": "sportradar:weight",
+    "jerseyNumber": "sportradar:jerseyNumber",
+    "position": "sportradar:position",
+    "starter": "sportradar:starter",
+
+    "live": "sportradar:liveCoverage",
+    "coverage": "sportradar:coverage"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "name": "SportEvent",
+  "description": "A Sportradar sport event representing a game, match, or competition between competitors.",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique Sportradar URN (e.g., sr:match:12345678).",
+      "required": true
+    },
+    {
+      "name": "scheduled",
+      "type": "string",
+      "description": "Scheduled start time in ISO 8601 UTC format.",
+      "required": true
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "description": "Event status: not_started, live, ended, closed, cancelled, postponed.",
+      "required": false
+    },
+    {
+      "name": "competitors",
+      "type": "array",
+      "description": "Exactly two competitors (home and away).",
+      "required": true,
+      "items": {
+        "name": "Competitor",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "Competitor URN (e.g., sr:competitor:3421).",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Competitor full name.",
+            "required": true
+          },
+          {
+            "name": "qualifier",
+            "type": "string",
+            "description": "Role: home or away.",
+            "required": true
+          },
+          {
+            "name": "abbreviation",
+            "type": "string",
+            "description": "Short abbreviation.",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "tournament",
+      "type": "object",
+      "description": "Tournament or league this event belongs to.",
+      "required": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Tournament URN.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Tournament name.",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "season",
+      "type": "object",
+      "description": "Season the event belongs to.",
+      "required": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Season URN.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Season label.",
+          "required": true
+        },
+        {
+          "name": "year",
+          "type": "string",
+          "description": "Season year.",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "venue",
+      "type": "object",
+      "description": "Venue where the event takes place.",
+      "required": false,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Venue URN.",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Venue name.",
+          "required": true
+        },
+        {
+          "name": "city",
+          "type": "string",
+          "description": "Venue city.",
+          "required": false
+        },
+        {
+          "name": "country",
+          "type": "string",
+          "description": "Venue country.",
+          "required": false
+        }
+      ]
+    }
+  ]
+}
