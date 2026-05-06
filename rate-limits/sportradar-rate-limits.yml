@@ -4,109 +4,45 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Sportradar
 providerId: sportradar
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Data
-  - Esports
-  - Fantasy Sports
-  - Media
-  - Real-Time
-  - Sports
   - Sports Data
-  - Statistics
+  - Media
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Sportradar API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Sportradar does not publish a consolidated rate-limits page. Trial
+  keys are commonly capped at low QPS, and commercial limits are negotiated per
+  contract and per sport feed. Real-time push feeds use streaming rather than
+  per-second polling.
+sources:
+  - https://sportradar.com/
+  - https://docs.sportradar.com/
+notes: Per-second / per-minute caps are not publicly documented; published only
+  inside the developer portal once a key is provisioned.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Sportradar Sports Data API
-      - Sportradar NBA API
-      - Sportradar NFL API
-      - Sportradar Soccer API
-      - Sportradar Odds API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Sportradar Sports Data API
-      - Sportradar NBA API
-      - Sportradar NFL API
-      - Sportradar Soccer API
-      - Sportradar Odds API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Sportradar Sports Data API
-      - Sportradar NBA API
-      - Sportradar NFL API
-      - Sportradar Soccer API
-      - Sportradar Odds API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Sportradar Sports Data API
-      - Sportradar NBA API
-      - Sportradar NFL API
-      - Sportradar Soccer API
-      - Sportradar Odds API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
+  - name: Trial Key (per sport package)
+    scope: key
+    metric: requests_per_second
+    limit: see developer portal
+    notes: Trial / sandbox keys are typically capped at low QPS (often 1 QPS) per
+      sport package; the exact value is shown in the developer portal once
+      issued.
+  - name: Commercial License Limits
     scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Sportradar Sports Data API
-      - Sportradar NBA API
-      - Sportradar NFL API
-      - Sportradar Soccer API
-      - Sportradar Odds API
+    metric: varies
+    limit: see commercial agreement
+    notes: Throughput, polling intervals, and concurrent stream counts are
+      contractually defined per sport, region, and use case.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Trial vs Production
+    description: Trial keys exist primarily for evaluation. Production throughput
+      is unlocked under a commercial license.
+  - name: Push vs Pull
+    description: Real-time data is delivered via push streams; clients should not
+      poll at high frequency in lieu of subscribing to the appropriate stream.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - FN: API Evangelist
+    email: info@apievangelist.com

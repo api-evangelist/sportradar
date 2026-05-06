@@ -1,172 +1,70 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Sportradar
+providerId: sportradar
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Sports Data
+  - Media
+  - FinOps
+  - FOCUS
+description: FOCUS-aligned FinOps placeholder for Sportradar. Cost is governed by
+  the bilateral data-licensing contract — typically a fixed annual fee plus
+  variable components for matches, streams, or revenue share — rather than a
+  per-API-call meter.
+sources:
+  - https://sportradar.com/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Sportradar
-providerId: sportradar
-publisherName: Sportradar
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Data
-  - Esports
-  - Fantasy Sports
-  - Media
-  - Real-Time
-  - Sports
-  - Sports Data
-  - Statistics
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Sportradar API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Sportradar AG
+serviceCategory: Sports Data Licensing
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
-  billingCurrency: USD
+  pricingCategory: Contact Sales
+  billingFrequency: Per-Contract
+  billingCurrency: USD (settlement varies)
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Sportradar
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Sports Data
   ProviderName: Sportradar
-  PublisherName: Sportradar
-  InvoiceIssuerName: Sportradar
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Sportradar AG
+  InvoiceIssuerName: Sportradar AG
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: contracted_data_license
+    description: Placeholder for the contracted data license; the actual billable
+      unit (annual fee, per-match, per-stream, revenue share) varies by product
+      and customer.
+    unit: varies
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - sport
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Sportradar Sports Data API
-    baseURL: ''
-    tags:
-      - Data
-      - Real-Time
-      - Sports
-      - Statistics
-    serviceName: Sportradar Sports Data API
-    serviceCategory: API
-  - name: Sportradar NBA API
-    baseURL: ''
-    tags:
-      - Basketball
-      - NBA
-      - Real-Time
-      - Sports
-    serviceName: Sportradar NBA API
-    serviceCategory: API
-  - name: Sportradar NFL API
-    baseURL: ''
-    tags:
-      - American Football
-      - NFL
-      - Real-Time
-      - Sports
-    serviceName: Sportradar NFL API
-    serviceCategory: API
-  - name: Sportradar Soccer API
-    baseURL: ''
-    tags:
-      - Real-Time
-      - Soccer
-      - Sports
-      - Statistics
-    serviceName: Sportradar Soccer API
-    serviceCategory: API
-  - name: Sportradar Odds API
-    baseURL: ''
-    tags:
-      - Betting
-      - Odds
-      - Sports
-      - Sportsbook
-    serviceName: Sportradar Odds API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - use_case
+principles:
+  - name: Visibility
+    description: Visibility is provided through the customer portal and contract
+      reporting deliverables. There is no public usage-API for cost extraction.
+  - name: Allocation
+    description: Costs are allocated against the licensing business unit
+      (sportsbook, media product, league partner) named in the contract.
+  - name: Optimization
+    description: Optimization happens at contract renewal — scoping the right
+      sport packages and feed depth for the use case rather than tuning request
+      patterns.
+  - name: Accountability
+    description: Owned by the commercial / product owner that signs the
+      sportsbook or media data agreement.
+notes: No self-serve per-call billing surface; all commercial relationships are
+  contracted.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - FN: API Evangelist
+    email: info@apievangelist.com
