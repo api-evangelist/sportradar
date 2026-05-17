@@ -40,7 +40,7 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.sportradar.com/docs/read/Home
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developer.sportradar.com/getting-started/docs/get-started
       - type: OpenAPI
         url: openapi/sportradar-sports-data-openapi.yml
@@ -115,7 +115,7 @@ common:
     url: https://developer.sportradar.com/
   - type: Documentation
     url: https://developer.sportradar.com/docs/read/Home
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Website
     url: https://sportradar.com/
@@ -123,7 +123,7 @@ common:
     url: https://sportradar.com/blog/
   - type: Pricing
     url: https://developer.sportradar.com/getting-started/docs/pricing
-  - type: Status
+  - type: StatusPage
     url: https://status.sportradar.com/
   - type: Support
     url: https://developer.sportradar.com/docs/read/Home#support
@@ -133,7 +133,7 @@ common:
     url: json-schema/sportradar-competitor-schema.json
   - type: JSONStructure
     url: json-structure/sportradar-sport-event-structure.json
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/sportradar-context.jsonld
   - type: SpectralRules
     url: rules/sportradar-rules.yml
