@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sportradar Sports Data API — Standings
+  description: 'Sportradar Sports Data API — Standings. 1 operations. Lead operation: Get NBA Standings. Self-contained Naftiko
+    capability covering one Sportradar business surface.'
+  tags:
+  - Sportradar
+  - Standings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPORTRADAR_API_KEY: SPORTRADAR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sports-data-standings
+    baseUri: https://api.sportradar.com
+    description: Sportradar Sports Data API — Standings business capability. Self-contained, no shared references.
+    resources:
+    - name: nba-trial-v8-en-seasons-season_year-REG-standings.json
+      path: /nba/trial/v8/en/seasons/{season_year}/REG/standings.json
+      operations:
+      - name: getnbastandings
+        method: GET
+        description: Get NBA Standings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: season_year
+          in: path
+          type: string
+          description: The season year (e.g., 2024).
+          required: true
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.SPORTRADAR_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: sports-data-standings-rest
+    port: 8080
+    description: REST adapter for Sportradar Sports Data API — Standings. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/nba/trial/v8/en/seasons/{season-year}/reg/standings-json
+      name: nba-trial-v8-en-seasons-season-year-reg-standings-json
+      description: REST surface for nba-trial-v8-en-seasons-season_year-REG-standings.json.
+      operations:
+      - method: GET
+        name: getnbastandings
+        description: Get NBA Standings
+        call: sports-data-standings.getnbastandings
+        with:
+          season_year: rest.season_year
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sports-data-standings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sportradar Sports Data API — Standings. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-nba-standings
+      description: Get NBA Standings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sports-data-standings.getnbastandings
+      with:
+        season_year: tools.season_year
+      outputParameters:
+      - type: object
+        mapping: $.

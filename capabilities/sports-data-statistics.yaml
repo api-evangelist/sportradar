@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sportradar Sports Data API — Statistics
+  description: 'Sportradar Sports Data API — Statistics. 1 operations. Lead operation: Get Soccer Competition Info. Self-contained
+    Naftiko capability covering one Sportradar business surface.'
+  tags:
+  - Sportradar
+  - Statistics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPORTRADAR_API_KEY: SPORTRADAR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sports-data-statistics
+    baseUri: https://api.sportradar.com
+    description: Sportradar Sports Data API — Statistics business capability. Self-contained, no shared references.
+    resources:
+    - name: soccer-t3-trial-v4-en-competitions-competition_id-info.json
+      path: /soccer-t3/trial/v4/en/competitions/{competition_id}/info.json
+      operations:
+      - name: getsoccercompetitioninfo
+        method: GET
+        description: Get Soccer Competition Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: competition_id
+          in: path
+          type: string
+          description: The unique identifier for the competition (e.g., sr:competition:17 for Premier League).
+          required: true
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.SPORTRADAR_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: sports-data-statistics-rest
+    port: 8080
+    description: REST adapter for Sportradar Sports Data API — Statistics. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/soccer-t3/trial/v4/en/competitions/{competition-id}/info-json
+      name: soccer-t3-trial-v4-en-competitions-competition-id-info-json
+      description: REST surface for soccer-t3-trial-v4-en-competitions-competition_id-info.json.
+      operations:
+      - method: GET
+        name: getsoccercompetitioninfo
+        description: Get Soccer Competition Info
+        call: sports-data-statistics.getsoccercompetitioninfo
+        with:
+          competition_id: rest.competition_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sports-data-statistics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sportradar Sports Data API — Statistics. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-soccer-competition-info
+      description: Get Soccer Competition Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sports-data-statistics.getsoccercompetitioninfo
+      with:
+        competition_id: tools.competition_id
+      outputParameters:
+      - type: object
+        mapping: $.

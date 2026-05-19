@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sportradar Sports Data API — Schedules
+  description: 'Sportradar Sports Data API — Schedules. 1 operations. Lead operation: Get NBA Daily Schedule. Self-contained
+    Naftiko capability covering one Sportradar business surface.'
+  tags:
+  - Sportradar
+  - Schedules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPORTRADAR_API_KEY: SPORTRADAR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sports-data-schedules
+    baseUri: https://api.sportradar.com
+    description: Sportradar Sports Data API — Schedules business capability. Self-contained, no shared references.
+    resources:
+    - name: nba-trial-v8-en-games-date-schedule.json
+      path: /nba/trial/v8/en/games/{date}/schedule.json
+      operations:
+      - name: getnbadailyschedule
+        method: GET
+        description: Get NBA Daily Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: date
+          in: path
+          type: string
+          description: The date in YYYY/MM/DD format.
+          required: true
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.SPORTRADAR_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: sports-data-schedules-rest
+    port: 8080
+    description: REST adapter for Sportradar Sports Data API — Schedules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/nba/trial/v8/en/games/{date}/schedule-json
+      name: nba-trial-v8-en-games-date-schedule-json
+      description: REST surface for nba-trial-v8-en-games-date-schedule.json.
+      operations:
+      - method: GET
+        name: getnbadailyschedule
+        description: Get NBA Daily Schedule
+        call: sports-data-schedules.getnbadailyschedule
+        with:
+          date: rest.date
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sports-data-schedules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sportradar Sports Data API — Schedules. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-nba-daily-schedule
+      description: Get NBA Daily Schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sports-data-schedules.getnbadailyschedule
+      with:
+        date: tools.date
+      outputParameters:
+      - type: object
+        mapping: $.
