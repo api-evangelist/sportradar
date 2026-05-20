@@ -5,9 +5,10 @@
       "source": "https://sportradar.com/blog/",
       "feed_url": "https://sportradar.com/feed/",
       "title": "Sportradar",
-      "saved": 10
+      "saved": 0,
+      "last_error": "parse_error"
     }
   ],
-  "fetched": "2026-05-09T20:17:51Z",
+  "fetched": "2026-05-17T20:20:35Z",
   "post_count": 10
 }
