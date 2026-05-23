@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DailySchedule",
+  "title": "DailySchedule",
+  "type": "object",
+  "description": "Schedule of games for a specific date.",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The schedule date."
+    },
+    "games": {
+      "type": "array",
+      "description": "List of scheduled games for the date.",
+      "items": {
+        "$ref": "#/components/schemas/ScheduledGame"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TeamScore",
+  "title": "TeamScore",
+  "type": "object",
+  "description": "Team score and identity within a game.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar team identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Full team name."
+    },
+    "alias": {
+      "type": "string",
+      "description": "Team abbreviation."
+    },
+    "points": {
+      "type": "integer",
+      "description": "Total points scored."
+    }
+  }
+}

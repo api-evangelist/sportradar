@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlayerProfile",
+  "title": "PlayerProfile",
+  "type": "object",
+  "description": "Player biographical and statistical profile.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar player identifier."
+    },
+    "full_name": {
+      "type": "string",
+      "description": "Player's full name."
+    },
+    "position": {
+      "type": "string",
+      "description": "Player's position."
+    },
+    "team": {
+      "$ref": "#/components/schemas/TeamRef"
+    },
+    "height": {
+      "type": "integer",
+      "description": "Player height in inches."
+    },
+    "weight": {
+      "type": "integer",
+      "description": "Player weight in pounds."
+    },
+    "birth_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Player's birth date."
+    },
+    "experience": {
+      "type": "string",
+      "description": "Player experience level."
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TeamStanding",
+  "title": "TeamStanding",
+  "type": "object",
+  "description": "A team's standing within a conference.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Team identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Team name."
+    },
+    "wins": {
+      "type": "integer",
+      "description": "Number of wins."
+    },
+    "losses": {
+      "type": "integer",
+      "description": "Number of losses."
+    },
+    "win_pct": {
+      "type": "number",
+      "format": "float",
+      "description": "Win percentage."
+    },
+    "rank": {
+      "type": "integer",
+      "description": "Conference rank."
+    }
+  }
+}

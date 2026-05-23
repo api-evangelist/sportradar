@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScheduledGame",
+  "title": "ScheduledGame",
+  "type": "object",
+  "description": "Basic information about a scheduled game.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar game identifier."
+    },
+    "status": {
+      "type": "string",
+      "description": "Game status."
+    },
+    "scheduled": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled tip-off or kickoff time."
+    },
+    "home": {
+      "$ref": "#/components/schemas/TeamRef"
+    },
+    "away": {
+      "$ref": "#/components/schemas/TeamRef"
+    },
+    "venue": {
+      "$ref": "#/components/schemas/Venue"
+    }
+  }
+}

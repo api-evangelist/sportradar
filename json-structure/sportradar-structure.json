@@ -1,0 +1,165 @@
+{
+  "provider": "Sportradar",
+  "providerId": "sportradar",
+  "kind": "json-structure",
+  "description": "Structural overview of the Sportradar API surface; extracted from openapi/.",
+  "schemaCount": 15,
+  "operationCount": 7,
+  "schemas": [
+    {
+      "name": "GameSummary",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "TeamScore",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "DailySchedule",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ScheduledGame",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "TeamRef",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Standings",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ConferenceStandings",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "TeamStanding",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Competition",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SportEventSummary",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "SportEvent",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SportEventStatus",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Competitor",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Venue",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "PlayerProfile",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/nba/trial/v8/en/games/{game_id}/summary.json",
+      "operationId": "getNbaGameSummary",
+      "summary": "Get NBA Game Summary",
+      "tags": [
+        "Scores"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/nba/trial/v8/en/games/{date}/schedule.json",
+      "operationId": "getNbaDailySchedule",
+      "summary": "Get NBA Daily Schedule",
+      "tags": [
+        "Schedules"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/nba/trial/v8/en/seasons/{season_year}/REG/standings.json",
+      "operationId": "getNbaStandings",
+      "summary": "Get NBA Standings",
+      "tags": [
+        "Standings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/soccer-t3/trial/v4/en/competitions/{competition_id}/info.json",
+      "operationId": "getSoccerCompetitionInfo",
+      "summary": "Get Soccer Competition Info",
+      "tags": [
+        "Statistics"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/soccer-t3/trial/v4/en/sport_events/{sport_event_id}/summary.json",
+      "operationId": "getSoccerMatchSummary",
+      "summary": "Get Soccer Match Summary",
+      "tags": [
+        "Scores"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/nfl/trial/v7/en/games/{game_id}/summary.json",
+      "operationId": "getNflGameSummary",
+      "summary": "Get NFL Game Summary",
+      "tags": [
+        "Scores"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/nba/trial/v8/en/players/{player_id}/profile.json",
+      "operationId": "getNbaPlayerProfile",
+      "summary": "Get NBA Player Profile",
+      "tags": [
+        "Competitors"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SportEventStatus",
+  "title": "SportEventStatus",
+  "type": "object",
+  "description": "Current status and score of a sport event.",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Current status of the sport event."
+    },
+    "match_status": {
+      "type": "string",
+      "description": "Detailed match status (not_started, live, ended)."
+    },
+    "home_score": {
+      "type": "integer",
+      "description": "Home team score."
+    },
+    "away_score": {
+      "type": "integer",
+      "description": "Away team score."
+    }
+  }
+}

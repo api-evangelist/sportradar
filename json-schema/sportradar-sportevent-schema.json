@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SportEvent",
+  "title": "SportEvent",
+  "type": "object",
+  "description": "Core sport event data.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar sport event identifier."
+    },
+    "scheduled": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled start time."
+    },
+    "competitors": {
+      "type": "array",
+      "description": "List of competing teams or players.",
+      "items": {
+        "$ref": "#/components/schemas/Competitor"
+      }
+    },
+    "venue": {
+      "$ref": "#/components/schemas/Venue"
+    }
+  }
+}

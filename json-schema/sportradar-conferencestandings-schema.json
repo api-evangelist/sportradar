@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ConferenceStandings",
+  "title": "ConferenceStandings",
+  "type": "object",
+  "description": "Conference-level standings.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Conference identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Conference name."
+    },
+    "teams": {
+      "type": "array",
+      "description": "Teams within the conference with their records.",
+      "items": {
+        "$ref": "#/components/schemas/TeamStanding"
+      }
+    }
+  }
+}

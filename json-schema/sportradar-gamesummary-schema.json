@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GameSummary",
+  "title": "GameSummary",
+  "type": "object",
+  "description": "Summary data for a completed or live sports game including teams, scores, and statistics.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar identifier for the game."
+    },
+    "status": {
+      "type": "string",
+      "description": "Game status (scheduled, inprogress, closed, cancelled, postponed).",
+      "enum": [
+        "scheduled",
+        "inprogress",
+        "closed",
+        "cancelled",
+        "postponed"
+      ]
+    },
+    "scheduled": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled start time in ISO 8601 format."
+    },
+    "home": {
+      "$ref": "#/components/schemas/TeamScore"
+    },
+    "away": {
+      "$ref": "#/components/schemas/TeamScore"
+    },
+    "venue": {
+      "$ref": "#/components/schemas/Venue"
+    }
+  }
+}

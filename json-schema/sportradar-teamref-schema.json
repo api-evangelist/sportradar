@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TeamRef",
+  "title": "TeamRef",
+  "type": "object",
+  "description": "Reference to a team.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique team identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Team name."
+    },
+    "alias": {
+      "type": "string",
+      "description": "Team abbreviation."
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Venue",
+  "title": "Venue",
+  "type": "object",
+  "description": "The venue where a game or match takes place.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique venue identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Venue name."
+    },
+    "city": {
+      "type": "string",
+      "description": "City where the venue is located."
+    },
+    "country": {
+      "type": "string",
+      "description": "Country where the venue is located."
+    },
+    "capacity": {
+      "type": "integer",
+      "description": "Seating capacity of the venue."
+    }
+  }
+}

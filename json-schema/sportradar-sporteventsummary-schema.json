@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SportEventSummary",
+  "title": "SportEventSummary",
+  "type": "object",
+  "description": "Summary of a soccer match including scoreline and incidents.",
+  "properties": {
+    "sport_event": {
+      "$ref": "#/components/schemas/SportEvent"
+    },
+    "sport_event_status": {
+      "$ref": "#/components/schemas/SportEventStatus"
+    }
+  }
+}

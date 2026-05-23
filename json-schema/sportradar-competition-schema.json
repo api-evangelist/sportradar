@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Competition",
+  "title": "Competition",
+  "type": "object",
+  "description": "Soccer competition information.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Sportradar competition identifier (e.g., sr:competition:17)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Competition name (e.g., Premier League)."
+    },
+    "category": {
+      "type": "object",
+      "description": "Geographic category of the competition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Category identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Category name (e.g., England)."
+        }
+      }
+    }
+  }
+}
