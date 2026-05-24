@@ -134,6 +134,8 @@ common:
     url: rules/sportradar-rules.yml
   - type: Vocabulary
     url: vocabulary/sportradar-vocabulary.yml
+  - type: LLMsTxt
+    url: https://developer.sportradar.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
