@@ -7,18 +7,21 @@ description: Sportradar is the world's leading sports technology company, provid
   JSON and XML responses.
 url: https://raw.githubusercontent.com/api-evangelist/sportradar/refs/heads/main/apis.yml
 created: '2024-12-25'
-modified: '2026-05-19'
+modified: '2026-05-29'
 specificationVersion: '0.19'
 type: Index
 tags:
   - Data
   - Esports
   - Fantasy Sports
+  - HTTP Chunked
   - Media
+  - Push
   - Real-Time
   - Sports
   - Sports Data
   - Statistics
+  - Streaming
 apis:
   - aid: sportradar:sports-data-api
     name: Sportradar Sports Data API
@@ -101,6 +104,34 @@ apis:
     properties:
     - type: Documentation
       url: https://developer.sportradar.com/docs/read/odds_comparison/Odds_Comparison_v2
+  - aid: sportradar:push-feeds-api
+    name: Sportradar Push Feeds API
+    description: Real-time streaming surface delivered over HTTP chunked transfer encoding for NFL, NBA, NHL, WNBA, and
+      Soccer. Push Feeds emit JSON events, statistics, clock updates, and draft activity on a long-lived HTTP connection,
+      with a five-second heartbeat when no new content is available. Push Feeds are available to Sportradar Realtime customers
+      as an add-on to the RESTful Sports Data APIs and are intended to complement, not replace, the request/response APIs.
+    humanURL: https://developer.sportradar.com/getting-started/docs/get-started
+    tags:
+    - Streaming
+    - Push
+    - Real-Time
+    - Sports
+    - HTTP Chunked
+    properties:
+    - type: Documentation
+      url: https://developer.sportradar.com/getting-started/docs/get-started
+    - type: Documentation
+      url: https://developer.sportradar.com/football/docs/nfl-ig-push
+    - type: Documentation
+      url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+    - type: Documentation
+      url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+    - type: Documentation
+      url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+    - type: Documentation
+      url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+    - type: OpenAPI
+      url: openapi/sportradar-push-feeds-openapi.yml
 common:
   - type: GitHubOrganization
     url: https://github.com/sportradar
