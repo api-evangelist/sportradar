@@ -1,0 +1,1021 @@
+"""
+Sportradar Sports Data API - Conceptual GraphQL Schema
+Source: https://developer.sportradar.com/
+Covers 80+ sports, 500+ leagues, real-time scores, statistics, odds, and event data.
+"""
+
+# ──────────────────────────────────────────────
+# Scalars
+# ──────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar JSON
+scalar URL
+
+# ──────────────────────────────────────────────
+# Enums
+# ──────────────────────────────────────────────
+
+enum SportType {
+  BALL
+  COMBAT
+  RACKET
+  WATER
+  WINTER
+  MOTOR
+  ESPORT
+  OTHER
+}
+
+enum CompetitionType {
+  LEAGUE
+  CUP
+  TOURNAMENT
+  PLAYOFF
+  FRIENDLY
+  INTERNATIONAL
+}
+
+enum MatchStatus {
+  NOT_STARTED
+  LIVE
+  HALFTIME
+  OVERTIME
+  PENALTY
+  POSTPONED
+  SUSPENDED
+  CANCELLED
+  FINISHED
+  AWARDED
+  DELAYED
+  INTERRUPTED
+  ABANDONED
+}
+
+enum PlayerPosition {
+  GOALKEEPER
+  DEFENDER
+  MIDFIELDER
+  FORWARD
+  PITCHER
+  CATCHER
+  INFIELDER
+  OUTFIELDER
+  POINT_GUARD
+  SHOOTING_GUARD
+  SMALL_FORWARD
+  POWER_FORWARD
+  CENTER
+  QUARTERBACK
+  RUNNING_BACK
+  WIDE_RECEIVER
+  TIGHT_END
+  OFFENSIVE_LINE
+  DEFENSIVE_LINE
+  LINEBACKER
+  CORNERBACK
+  SAFETY
+  UNKNOWN
+}
+
+enum EventType {
+  GOAL
+  YELLOW_CARD
+  RED_CARD
+  YELLOW_RED_CARD
+  SUBSTITUTION
+  PENALTY
+  CORNER
+  FREE_KICK
+  SHOT_ON_TARGET
+  SHOT_OFF_TARGET
+  BLOCKED_SHOT
+  OFFSIDE
+  FOUL
+  INJURY
+  VAR_DECISION
+  PERIOD_START
+  PERIOD_END
+  MATCH_START
+  MATCH_END
+  TIMEOUT
+  CHALLENGE
+  REVIEW
+}
+
+# ──────────────────────────────────────────────
+# Pagination
+# ──────────────────────────────────────────────
+
+"""Cursor-based pagination metadata."""
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+# ──────────────────────────────────────────────
+# Auth / Access
+# ──────────────────────────────────────────────
+
+"""An API key credential used to authenticate Sportradar requests."""
+type APIKey {
+  id: ID!
+  key: String!
+  name: String
+  sport: String
+  tier: String
+  rateLimitPerSecond: Int
+  rateLimitPerDay: Int
+  expiresAt: DateTime
+  createdAt: DateTime!
+}
+
+"""Access token for session-based or OAuth flows."""
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int
+  scope: String
+}
+
+# ──────────────────────────────────────────────
+# Sport
+# ──────────────────────────────────────────────
+
+"""Top-level sport entity (e.g., Soccer, Basketball, American Football)."""
+type Sport {
+  id: ID!
+  name: String!
+  alias: String
+  type: SportType!
+  details: SportDetails
+  competitions: [Competition!]
+  context: SportContext
+}
+
+"""Extended descriptive metadata for a sport."""
+type SportDetails {
+  description: String
+  officialName: String
+  governingBody: String
+  foundedYear: Int
+  popularity: Int
+  supportedRegions: [String!]
+  feedsAvailable: [String!]
+}
+
+"""Contextual configuration for a sport feed."""
+type SportContext {
+  sport: Sport!
+  locale: String
+  timezone: String
+  currency: String
+  defaultCompetitionId: ID
+}
+
+# ──────────────────────────────────────────────
+# Competition
+# ──────────────────────────────────────────────
+
+"""A league, cup, or recurring competition (e.g., English Premier League)."""
+type Competition {
+  id: ID!
+  name: String!
+  alias: String
+  type: CompetitionType!
+  sport: Sport!
+  country: String
+  countryCode: String
+  gender: String
+  details: CompetitionDetails
+  seasons: [Season!]
+  currentSeason: Season
+}
+
+"""Extended metadata for a competition."""
+type CompetitionDetails {
+  description: String
+  level: String
+  format: String
+  numberOfTeams: Int
+  promotionPlaces: Int
+  relegationPlaces: Int
+  championshipPlayoffTeams: Int
+  website: URL
+}
+
+# ──────────────────────────────────────────────
+# Season
+# ──────────────────────────────────────────────
+
+"""A timed edition of a competition (e.g., 2024/25 Premier League season)."""
+type Season {
+  id: ID!
+  name: String!
+  startDate: Date!
+  endDate: Date!
+  year: String
+  competition: Competition!
+  details: SeasonDetails
+  stages: [Stage!]
+  standings: Standing
+  teams: [Team!]
+}
+
+"""Extended metadata for a season."""
+type SeasonDetails {
+  description: String
+  numberOfRounds: Int
+  numberOfMatches: Int
+  champion: Team
+  topScorer: Player
+  mostAssists: Player
+}
+
+# ──────────────────────────────────────────────
+# Tournament
+# ──────────────────────────────────────────────
+
+"""A sub-competition or knockout bracket within a season."""
+type Tournament {
+  id: ID!
+  name: String!
+  type: CompetitionType
+  season: Season!
+  details: TournamentDetails
+  stages: [Stage!]
+  teams: [Team!]
+}
+
+"""Extended metadata for a tournament."""
+type TournamentDetails {
+  description: String
+  format: String
+  numberOfTeams: Int
+  rounds: Int
+  hostCountry: String
+  hostCity: String
+  startDate: Date
+  endDate: Date
+}
+
+# ──────────────────────────────────────────────
+# Stage
+# ──────────────────────────────────────────────
+
+"""A phase within a tournament or season (e.g., Group Stage, Knockout)."""
+type Stage {
+  id: ID!
+  name: String!
+  type: String
+  orderNumber: Int
+  season: Season
+  tournament: Tournament
+  details: StageDetails
+  rounds: [Round!]
+}
+
+"""Extended metadata for a stage."""
+type StageDetails {
+  description: String
+  format: String
+  numberOfGroups: Int
+  teamsPerGroup: Int
+  advancingTeams: Int
+}
+
+# ──────────────────────────────────────────────
+# Round
+# ──────────────────────────────────────────────
+
+"""A matchday or round within a stage."""
+type Round {
+  id: ID!
+  name: String!
+  number: Int
+  type: String
+  stage: Stage!
+  details: RoundDetails
+  matches: [Match!]
+}
+
+"""Extended metadata for a round."""
+type RoundDetails {
+  description: String
+  startDate: Date
+  endDate: Date
+  numberOfMatches: Int
+}
+
+# ──────────────────────────────────────────────
+# Match
+# ──────────────────────────────────────────────
+
+"""A single sporting event between two competitors."""
+type Match {
+  id: ID!
+  name: String
+  scheduledAt: DateTime!
+  startedAt: DateTime
+  endedAt: DateTime
+  status: MatchStatus!
+  homeTeam: Team!
+  awayTeam: Team!
+  venue: Venue
+  referee: Referee
+  round: Round
+  score: MatchScore
+  odds: MatchOdds
+  details: MatchDetails
+  lineups: [Lineup!]
+  timeline: Timeline
+  commentary: Commentary
+  events: [Event!]
+  statistics: [StatGroup!]
+}
+
+"""Extended metadata for a match."""
+type MatchDetails {
+  weather: String
+  attendance: Int
+  broadcastInfo: String
+  neutralVenue: Boolean
+  coverageLevel: String
+  feedType: String
+}
+
+"""Scoreline data for a match, including period-by-period breakdown."""
+type MatchScore {
+  homeScore: Int!
+  awayScore: Int!
+  homeScoreHT: Int
+  awayScoreHT: Int
+  homeScoreET: Int
+  awayScoreET: Int
+  homeScorePenalty: Int
+  awayScorePenalty: Int
+  winner: String
+  awardedHomeScore: Int
+  awardedAwayScore: Int
+}
+
+"""Aggregated odds snapshot for a match."""
+type MatchOdds {
+  homeWin: Float
+  draw: Float
+  awayWin: Float
+  over: Float
+  under: Float
+  marketCount: Int
+  booksOffering: Int
+}
+
+# ──────────────────────────────────────────────
+# Venue
+# ──────────────────────────────────────────────
+
+"""A physical location where matches are played."""
+type Venue {
+  id: ID!
+  name: String!
+  city: String
+  country: String
+  countryCode: String
+  latitude: Float
+  longitude: Float
+  details: VenueDetails
+  capacity: VenueCapacity
+}
+
+"""Extended metadata for a venue."""
+type VenueDetails {
+  address: String
+  postcode: String
+  openedYear: Int
+  surface: String
+  roofType: String
+  website: URL
+  timezone: String
+}
+
+"""Capacity figures for a venue."""
+type VenueCapacity {
+  total: Int
+  seated: Int
+  standing: Int
+  vip: Int
+}
+
+# ──────────────────────────────────────────────
+# Referee
+# ──────────────────────────────────────────────
+
+"""A match official."""
+type Referee {
+  id: ID!
+  name: String!
+  nationality: String
+  details: RefereeDetails
+}
+
+"""Extended metadata for a referee."""
+type RefereeDetails {
+  dateOfBirth: Date
+  yearsActive: Int
+  competitionsOfficiated: [String!]
+  averageCardsPerMatch: Float
+}
+
+# ──────────────────────────────────────────────
+# Team
+# ──────────────────────────────────────────────
+
+"""A sports team or club."""
+type Team {
+  id: ID!
+  name: String!
+  abbreviation: String
+  alias: String
+  country: String
+  countryCode: String
+  founded: Int
+  gender: String
+  sport: Sport
+  venue: Venue
+  details: TeamDetails
+  stats: TeamStats
+  record: TeamRecord
+  players: [Player!]
+  roster: [Player!]
+}
+
+"""Extended metadata for a team."""
+type TeamDetails {
+  fullName: String
+  nickname: String
+  colors: [String!]
+  division: String
+  conference: String
+  coach: String
+  manager: String
+  website: URL
+  socialMedia: JSON
+}
+
+"""Aggregated statistical totals for a team."""
+type TeamStats {
+  gamesPlayed: Int
+  wins: Int
+  losses: Int
+  draws: Int
+  goalsFor: Int
+  goalsAgainst: Int
+  goalDifference: Int
+  points: Int
+  shotsPerGame: Float
+  possessionPct: Float
+  passAccuracyPct: Float
+  yellowCards: Int
+  redCards: Int
+  cleanSheets: Int
+  averageGoalsScored: Float
+  averageGoalsConceded: Float
+}
+
+"""Win/loss/draw record for a team across contexts."""
+type TeamRecord {
+  overall: RecordLine
+  home: RecordLine
+  away: RecordLine
+  lastFive: RecordLine
+}
+
+"""A simple wins/losses/draws/overtime-losses line."""
+type RecordLine {
+  wins: Int!
+  losses: Int!
+  draws: Int
+  overtimeLosses: Int
+  points: Int
+}
+
+# ──────────────────────────────────────────────
+# Player
+# ──────────────────────────────────────────────
+
+"""A sports competitor / athlete."""
+type Player {
+  id: ID!
+  name: String!
+  firstName: String
+  lastName: String
+  nationality: String
+  nationalityCode: String
+  position: PlayerPosition
+  jerseyNumber: Int
+  team: Team
+  profile: PlayerProfile
+  stats: PlayerStats
+  details: PlayerDetails
+}
+
+"""Biographical and physical profile for a player."""
+type PlayerProfile {
+  dateOfBirth: Date
+  placeOfBirth: String
+  height: Float
+  weight: Float
+  foot: String
+  hand: String
+  agentName: String
+  contractUntil: Date
+  marketValue: Float
+  marketValueCurrency: String
+}
+
+"""Extended descriptive metadata for a player."""
+type PlayerDetails {
+  nicknames: [String!]
+  biography: String
+  socialMedia: JSON
+  imageURL: URL
+  status: String
+  injuryStatus: String
+}
+
+"""Aggregated statistics for a player."""
+type PlayerStats {
+  gamesPlayed: Int
+  gamesStarted: Int
+  minutesPlayed: Int
+  goals: Int
+  assists: Int
+  yellowCards: Int
+  redCards: Int
+  shots: Int
+  shotsOnTarget: Float
+  keyPasses: Int
+  tackles: Int
+  interceptions: Int
+  clearances: Int
+  saves: Int
+  cleanSheets: Int
+  passAccuracyPct: Float
+  dribbleSuccessRate: Float
+  aerialDuelsWonPct: Float
+  rating: Float
+}
+
+# ──────────────────────────────────────────────
+# Lineup
+# ──────────────────────────────────────────────
+
+"""The squad selected for a match."""
+type Lineup {
+  id: ID!
+  match: Match!
+  team: Team!
+  formation: String
+  details: LineupDetails
+  players: [LineupPlayer!]
+  substitutions: [Substitution!]
+}
+
+"""Details and tactical notes for a lineup."""
+type LineupDetails {
+  confirmed: Boolean
+  confirmedAt: DateTime
+  notes: String
+}
+
+"""A player's entry in a match lineup."""
+type LineupPlayer {
+  player: Player!
+  position: PlayerPosition
+  jerseyNumber: Int
+  order: Int
+  isCaptain: Boolean
+  isGoalkeeper: Boolean
+  substituted: Boolean
+}
+
+"""A substitution event within a match."""
+type Substitution {
+  id: ID!
+  match: Match!
+  team: Team!
+  playerIn: Player!
+  playerOut: Player!
+  minute: Int!
+  injuryRelated: Boolean
+}
+
+# ──────────────────────────────────────────────
+# Events
+# ──────────────────────────────────────────────
+
+"""A generic in-match event."""
+type Event {
+  id: ID!
+  match: Match!
+  type: EventType!
+  minute: Int
+  additionalMinute: Int
+  team: Team
+  player: Player
+  assistPlayer: Player
+  details: EventDetails
+}
+
+"""Extended metadata for a match event."""
+type EventDetails {
+  description: String
+  coordinates: JSON
+  varReviewed: Boolean
+  varOutcome: String
+  outcomeType: String
+  injuryTime: Boolean
+}
+
+"""A goal event with associated method and body part."""
+type GoalEvent {
+  id: ID!
+  match: Match!
+  minute: Int!
+  additionalMinute: Int
+  team: Team!
+  scorer: Player!
+  assist: Player
+  method: String
+  bodyPart: String
+  scoreline: MatchScore!
+  ownGoal: Boolean
+  penalty: Boolean
+}
+
+"""A disciplinary card event."""
+type CardEvent {
+  id: ID!
+  match: Match!
+  minute: Int!
+  additionalMinute: Int
+  team: Team!
+  player: Player!
+  cardType: String!
+  reason: String
+  secondYellow: Boolean
+}
+
+"""A shot attempt event."""
+type ShotEvent {
+  id: ID!
+  match: Match!
+  minute: Int!
+  team: Team!
+  player: Player!
+  onTarget: Boolean!
+  blocked: Boolean
+  savedBy: Player
+  coordinates: JSON
+  expectedGoal: Float
+  bodyPart: String
+}
+
+# ──────────────────────────────────────────────
+# Timeline
+# ──────────────────────────────────────────────
+
+"""Chronological record of all events in a match."""
+type Timeline {
+  match: Match!
+  entries: [TimelineEntry!]!
+  totalEntries: Int!
+}
+
+"""A single entry in the match timeline."""
+type TimelineEntry {
+  id: ID!
+  type: EventType!
+  minute: Int
+  additionalMinute: Int
+  team: Team
+  player: Player
+  description: String
+  score: MatchScore
+  timestamp: DateTime
+}
+
+# ──────────────────────────────────────────────
+# Standings
+# ──────────────────────────────────────────────
+
+"""A league table or bracket standings snapshot."""
+type Standing {
+  id: ID!
+  season: Season
+  competition: Competition
+  round: Round
+  updatedAt: DateTime
+  groups: [StandingGroup!]
+}
+
+"""A group within standings (e.g., Group A in a World Cup)."""
+type StandingGroup {
+  id: ID!
+  name: String
+  rows: [StandingsRow!]!
+}
+
+"""A single team's row in a standings table."""
+type StandingsRow {
+  position: Int!
+  team: Team!
+  gamesPlayed: Int!
+  wins: Int!
+  losses: Int!
+  draws: Int!
+  goalsFor: Int!
+  goalsAgainst: Int!
+  goalDifference: Int!
+  points: Int!
+  form: String
+  promotionStatus: String
+  relegationStatus: String
+}
+
+# ──────────────────────────────────────────────
+# Statistics
+# ──────────────────────────────────────────────
+
+"""A grouped set of statistics (e.g., attack, defence, possession)."""
+type StatGroup {
+  id: ID!
+  name: String!
+  scope: String
+  team: Team
+  player: Player
+  values: [StatValue!]!
+}
+
+"""A single named statistic value."""
+type StatValue {
+  name: String!
+  value: String!
+  homeValue: String
+  awayValue: String
+  unit: String
+  type: String
+}
+
+# ──────────────────────────────────────────────
+# Head-to-Head
+# ──────────────────────────────────────────────
+
+"""Historical head-to-head record between two teams."""
+type Head2Head {
+  teamA: Team!
+  teamB: Team!
+  totalMatches: Int!
+  teamAWins: Int!
+  teamBWins: Int!
+  draws: Int!
+  teamAGoals: Int!
+  teamBGoals: Int!
+  lastMatches: [Match!]
+  lastMeetingDate: Date
+}
+
+# ──────────────────────────────────────────────
+# Odds
+# ──────────────────────────────────────────────
+
+"""Odds data for a sporting event."""
+type Odds {
+  id: ID!
+  match: Match!
+  status: String
+  details: OddsDetails
+  markets: [Market!]!
+}
+
+"""Extended metadata for odds data."""
+type OddsDetails {
+  bookmakerCount: Int
+  openingLine: MatchOdds
+  closingLine: MatchOdds
+  lineMovement: JSON
+  lastUpdated: DateTime
+}
+
+"""A betting market (e.g., Match Winner, Both Teams to Score)."""
+type Market {
+  id: ID!
+  name: String!
+  type: String
+  status: String
+  outcomes: [Outcome!]!
+  bookmakers: [String!]
+}
+
+"""A selectable outcome within a betting market."""
+type Outcome {
+  id: ID!
+  name: String!
+  odds: Float!
+  probability: Float
+  status: String
+  bookmaker: String
+  lastUpdated: DateTime
+}
+
+# ──────────────────────────────────────────────
+# Commentary
+# ──────────────────────────────────────────────
+
+"""Live or post-match textual commentary feed."""
+type Commentary {
+  match: Match!
+  language: String
+  entries: [CommentaryEntry!]!
+  totalEntries: Int!
+}
+
+"""A single commentary entry."""
+type CommentaryEntry {
+  id: ID!
+  minute: Int
+  additionalMinute: Int
+  type: String
+  text: String!
+  timestamp: DateTime
+  important: Boolean
+}
+
+# ──────────────────────────────────────────────
+# Data Feeds (Push / Streaming)
+# ──────────────────────────────────────────────
+
+"""Descriptor for a Sportradar push data feed endpoint."""
+type DataFeed {
+  id: ID!
+  sport: Sport!
+  name: String!
+  status: String
+  details: DataFeedDetails
+}
+
+"""Configuration and metadata for a push data feed."""
+type DataFeedDetails {
+  endpointURL: URL
+  format: String
+  encoding: String
+  heartbeatSeconds: Int
+  events: [String!]
+  tier: String
+  latencyMs: Int
+  authRequired: Boolean
+}
+
+# ──────────────────────────────────────────────
+# Search
+# ──────────────────────────────────────────────
+
+"""A search query and its results across the sports data graph."""
+type SearchQuery {
+  query: String!
+  filters: [SearchFilter!]
+  sports: [Sport!]
+  competitions: [Competition!]
+  teams: [Team!]
+  players: [Player!]
+  matches: [Match!]
+  totalResults: Int!
+  pageInfo: PageInfo!
+}
+
+"""A filter applied to a search query."""
+type SearchFilter {
+  field: String!
+  operator: String!
+  value: String!
+}
+
+# ──────────────────────────────────────────────
+# Root Types
+# ──────────────────────────────────────────────
+
+type Query {
+  """Fetch a single sport by ID."""
+  sport(id: ID!): Sport
+
+  """List all available sports."""
+  sports(type: SportType): [Sport!]!
+
+  """Fetch a competition by ID."""
+  competition(id: ID!): Competition
+
+  """List competitions, filterable by sport and type."""
+  competitions(sportId: ID, type: CompetitionType, country: String): [Competition!]!
+
+  """Fetch a season by ID."""
+  season(id: ID!): Season
+
+  """Fetch a tournament by ID."""
+  tournament(id: ID!): Tournament
+
+  """Fetch a stage by ID."""
+  stage(id: ID!): Stage
+
+  """Fetch a round by ID."""
+  round(id: ID!): Round
+
+  """Fetch a match by ID."""
+  match(id: ID!): Match
+
+  """List matches with optional filters."""
+  matches(
+    status: MatchStatus
+    date: Date
+    sportId: ID
+    competitionId: ID
+    seasonId: ID
+    roundId: ID
+    teamId: ID
+    first: Int
+    after: String
+  ): [Match!]!
+
+  """Fetch a team by ID."""
+  team(id: ID!): Team
+
+  """List teams with optional filters."""
+  teams(sportId: ID, competitionId: ID, country: String): [Team!]!
+
+  """Fetch a player by ID."""
+  player(id: ID!): Player
+
+  """Search players by name or position."""
+  players(name: String, position: PlayerPosition, teamId: ID): [Player!]!
+
+  """Get standings for a season or competition."""
+  standings(seasonId: ID, competitionId: ID, roundId: ID): Standing
+
+  """Get odds for a match."""
+  odds(matchId: ID!): Odds
+
+  """Get head-to-head record between two teams."""
+  head2head(teamAId: ID!, teamBId: ID!): Head2Head
+
+  """Fetch a venue by ID."""
+  venue(id: ID!): Venue
+
+  """Fetch a referee by ID."""
+  referee(id: ID!): Referee
+
+  """Fetch commentary for a match."""
+  commentary(matchId: ID!, language: String): Commentary
+
+  """Retrieve a push data feed descriptor."""
+  dataFeed(id: ID!): DataFeed
+
+  """List available push data feeds."""
+  dataFeeds(sportId: ID): [DataFeed!]!
+
+  """Full-text search across sports entities."""
+  search(query: String!, filters: [SearchFilterInput!], first: Int, after: String): SearchQuery!
+
+  """Retrieve API key details."""
+  apiKey(key: String!): APIKey
+}
+
+input SearchFilterInput {
+  field: String!
+  operator: String!
+  value: String!
+}
+
+type Mutation {
+  """Authenticate and obtain an access token."""
+  authenticate(apiKey: String!): Token
+}
+
+type Subscription {
+  """Subscribe to live match events."""
+  matchEvents(matchId: ID!): Event
+
+  """Subscribe to live score updates."""
+  scoreUpdates(matchId: ID!): MatchScore
+
+  """Subscribe to odds changes for a match."""
+  oddsUpdates(matchId: ID!): Odds
+
+  """Subscribe to timeline updates for a match."""
+  timelineUpdates(matchId: ID!): TimelineEntry
+
+  """Subscribe to commentary entries for a match."""
+  commentaryUpdates(matchId: ID!, language: String): CommentaryEntry
+}
