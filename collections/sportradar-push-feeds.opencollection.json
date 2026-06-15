@@ -1,0 +1,586 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Push Feeds API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NFL Push",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/events/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time information on every live NFL game event as it occurs. Events include scoring plays, drive updates, and other on-field activity. Heartbeat messages are sent every five seconds when no new events are available. Use the optional match filter to limit the stream to a single game."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/statistics/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams detailed, real-time game statistics at the team and player level. Heartbeat messages are sent every five seconds when no new statistics are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Pulse",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/pulse/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time pulse messages describing on-field activity. Heartbeat messages are sent every five seconds when no new content is available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Draft Picks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/draft-picks/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NFL draft pick selections as they occur. Heartbeat messages are sent every five seconds when no new picks are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Draft Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/draft-trades/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams summary details of all in-draft trades in real-time. Heartbeat messages are sent every five seconds when no new trades are available."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NBA Push",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to NBA Push Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/:access_level/stream/:language_code/events/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NBA game events and play-by-play information. Heartbeat messages are sent every five seconds when no new events are available. Use the optional match filter to limit the stream to a single game."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NBA Push Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/:access_level/stream/:language_code/statistics/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NBA team and player statistics updates. Heartbeat messages are sent every five seconds when no new statistics are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NBA Push Clock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/:access_level/stream/:language_code/clock/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time game clock timing updates for NBA games. Heartbeat messages are sent every five seconds when no new clock data is available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NBA Push Draft Picks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/:access_level/stream/:language_code/draft_picks/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NBA draft pick selections as they occur. Heartbeat messages are sent every five seconds when no new picks are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NBA Push Draft Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/:access_level/stream/:language_code/draft_trades/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams summary details of all in-draft NBA trades in real-time. Heartbeat messages are sent every five seconds when no new trades are available."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NHL Push",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to NHL Push Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nhl/:access_level/stream/:language_code/events/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NHL game event details. Heartbeat messages are sent every five seconds when no new events are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NHL Push Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nhl/:access_level/stream/:language_code/statistics/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NHL team and player-level game statistics. Heartbeat messages are sent every five seconds when no new statistics are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NHL Push Clock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nhl/:access_level/stream/:language_code/push-clock/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NHL game clock updates, including scoring and strength data. Heartbeat messages are sent every five seconds when no new clock data is available."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "WNBA Push",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to WNBA Push Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/wnba/:access_level/stream/events/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time WNBA game events. Heartbeat messages are sent every five seconds when no new events are available. Use the optional match filter to limit the stream to a single game."
+        },
+        {
+          "info": {
+            "name": "Subscribe to WNBA Push Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/wnba/:access_level/stream/statistics/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time WNBA team and player statistics. Heartbeat messages are sent every five seconds when no new statistics are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to WNBA Push Clock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/wnba/:access_level/stream/clock/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time WNBA game clock updates. Heartbeat messages are sent every five seconds when no new clock data is available."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Soccer Push",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to Soccer Push Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer/:access_level/:version/stream/events/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar Soccer API version (for example, v4)."
+              },
+              {
+                "name": "sport_event_id",
+                "value": "",
+                "type": "query",
+                "description": "Limit the stream to a specific sport event identifier."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to JSON."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time match events across Sportradar's soccer coverage. Heartbeat messages are sent every five seconds when no new events are available. Use the optional sport_event_id filter to limit the stream to a single match."
+        },
+        {
+          "info": {
+            "name": "Subscribe to Soccer Push Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer/:access_level/:version/stream/statistics/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar Soccer API version (for example, v4)."
+              },
+              {
+                "name": "sport_event_id",
+                "value": "",
+                "type": "query",
+                "description": "Limit the stream to a specific sport event identifier."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to JSON."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time soccer match statistics. Heartbeat messages are sent every five seconds when no new statistics are available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

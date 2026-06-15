@@ -2,8 +2,8 @@
   "repo": "sportradar",
   "feeds": [
     {
-      "source": "https://sportradar.com/feed/",
-      "feed_url": "https://sportradar.com/feed/",
+      "source": "https://sportradar.com/blog/",
+      "feed_url": "https://sportradar.com/blog/",
       "title": "",
       "saved": 0,
       "method": "none"
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-06-01T23:35:02Z",
-  "post_count": 10
+  "post_count": 10,
+  "fetched": "2026-06-14T20:42:17Z"
 }

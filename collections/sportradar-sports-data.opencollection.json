@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Sports Data API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NBA Game Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/trial/v8/en/games/:game_id/summary.json",
+            "params": [
+              {
+                "name": "game_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the NBA game."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns a complete summary of an NBA game including box score, team statistics, player statistics, and period-by-period scoring. Available for both completed and live games."
+        },
+        {
+          "info": {
+            "name": "Get Soccer Match Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer-t3/trial/v4/en/sport_events/:sport_event_id/summary.json",
+            "params": [
+              {
+                "name": "sport_event_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique Sportradar ID for the sport event (e.g., sr:match:12345)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns a detailed summary of a soccer match including match timeline, scoreline, statistics, lineups, and incident data (goals, cards, substitutions)."
+        },
+        {
+          "info": {
+            "name": "Get NFL Game Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/trial/v7/en/games/:game_id/summary.json",
+            "params": [
+              {
+                "name": "game_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the NFL game."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns a complete NFL game summary including scoring drives, team statistics, individual player statistics, and game situation data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NBA Daily Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/trial/v8/en/games/:date/schedule.json",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "The date in YYYY/MM/DD format."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns the schedule of NBA games for a specific date, including game status, team matchups, venue information, and broadcast details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Standings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NBA Standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/trial/v8/en/seasons/:season_year/REG/standings.json",
+            "params": [
+              {
+                "name": "season_year",
+                "value": "",
+                "type": "path",
+                "description": "The season year (e.g., 2024)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns current NBA standings for the specified season, including wins, losses, win percentage, conference and division rankings."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Soccer Competition Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer-t3/trial/v4/en/competitions/:competition_id/info.json",
+            "params": [
+              {
+                "name": "competition_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the competition (e.g., sr:competition:17 for Premier League)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a soccer competition including category, sport, coverage information, and available seasons."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Competitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NBA Player Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/trial/v8/en/players/:player_id/profile.json",
+            "params": [
+              {
+                "name": "player_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique Sportradar player identifier."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns biographical and statistical profile information for an NBA player including career statistics, current season averages, and team history."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
