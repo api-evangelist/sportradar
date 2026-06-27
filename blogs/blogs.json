@@ -3,19 +3,12 @@
   "feeds": [
     {
       "source": "https://sportradar.com/blog/",
-      "feed_url": "https://sportradar.com/blog/",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://sportradar.com/",
-      "feed_url": "https://sportradar.com/",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
   "post_count": 10,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:12:10Z",
+  "agent_pulled": "2026-06-27"
 }
