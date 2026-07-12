@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sportradar-push-feeds-openapi.yml, openapi/sportradar-sports-data-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: Sportradar Push Feeds require an API key passed in the x-api-key request header.
+    Push entitlements are tied to Realtime customer accounts.
+  sources:
+  - openapi/sportradar-push-feeds-openapi.yml
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: Sportradar API key passed as a query parameter. Obtain from the Sportradar developer
+    portal.
+  sources:
+  - openapi/sportradar-sports-data-openapi.yml
