@@ -134,6 +134,8 @@ apis:
   - type: OpenAPI
     url: openapi/sportradar-push-feeds-openapi.yml
 common:
+- type: AgenticAccess
+  url: agentic-access/sportradar-agentic-access.yml
 - type: DomainSecurity
   url: security/sportradar-domain-security.yml
 - type: Authentication

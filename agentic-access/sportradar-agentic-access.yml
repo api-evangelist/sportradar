@@ -1,0 +1,264 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/sportradar-push-feeds-openapi.yml, openapi/sportradar-sports-data-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 25
+  by_action_class:
+    connected: 25
+  by_consequence:
+    read: 25
+  human_in_the_loop_required: 0
+operations:
+- path: /nfl/official/{access_level}/stream/{language_code}/events/subscribe
+  method: get
+  operationId: subscribeNflPushEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nfl/official/{access_level}/stream/{language_code}/statistics/subscribe
+  method: get
+  operationId: subscribeNflPushStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nfl/official/{access_level}/stream/{language_code}/pulse/subscribe
+  method: get
+  operationId: subscribeNflPushPulse
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nfl/official/{access_level}/stream/{language_code}/draft-picks/subscribe
+  method: get
+  operationId: subscribeNflPushDraftPicks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nfl/official/{access_level}/stream/{language_code}/draft-trades/subscribe
+  method: get
+  operationId: subscribeNflPushDraftTrades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/{access_level}/stream/{language_code}/events/subscribe
+  method: get
+  operationId: subscribeNbaPushEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/{access_level}/stream/{language_code}/statistics/subscribe
+  method: get
+  operationId: subscribeNbaPushStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/{access_level}/stream/{language_code}/clock/subscribe
+  method: get
+  operationId: subscribeNbaPushClock
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/{access_level}/stream/{language_code}/draft_picks/subscribe
+  method: get
+  operationId: subscribeNbaPushDraftPicks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/{access_level}/stream/{language_code}/draft_trades/subscribe
+  method: get
+  operationId: subscribeNbaPushDraftTrades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nhl/{access_level}/stream/{language_code}/events/subscribe
+  method: get
+  operationId: subscribeNhlPushEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nhl/{access_level}/stream/{language_code}/statistics/subscribe
+  method: get
+  operationId: subscribeNhlPushStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nhl/{access_level}/stream/{language_code}/push-clock/subscribe
+  method: get
+  operationId: subscribeNhlPushClock
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wnba/{access_level}/stream/events/subscribe
+  method: get
+  operationId: subscribeWnbaPushEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wnba/{access_level}/stream/statistics/subscribe
+  method: get
+  operationId: subscribeWnbaPushStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wnba/{access_level}/stream/clock/subscribe
+  method: get
+  operationId: subscribeWnbaPushClock
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /soccer/{access_level}/{version}/stream/events/subscribe
+  method: get
+  operationId: subscribeSoccerPushEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /soccer/{access_level}/{version}/stream/statistics/subscribe
+  method: get
+  operationId: subscribeSoccerPushStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/trial/v8/en/games/{game_id}/summary.json
+  method: get
+  operationId: getNbaGameSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/trial/v8/en/games/{date}/schedule.json
+  method: get
+  operationId: getNbaDailySchedule
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/trial/v8/en/seasons/{season_year}/REG/standings.json
+  method: get
+  operationId: getNbaStandings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /soccer-t3/trial/v4/en/competitions/{competition_id}/info.json
+  method: get
+  operationId: getSoccerCompetitionInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /soccer-t3/trial/v4/en/sport_events/{sport_event_id}/summary.json
+  method: get
+  operationId: getSoccerMatchSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nfl/trial/v7/en/games/{game_id}/summary.json
+  method: get
+  operationId: getNflGameSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /nba/trial/v8/en/players/{player_id}/profile.json
+  method: get
+  operationId: getNbaPlayerProfile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
