@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: Sportradar Push Feeds Competitors Scores API
+  description: Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.
+  version: v1
+  contact:
+    name: Sportradar Developer Support
+    url: https://developer.sportradar.com/docs/read/Home#support
+  termsOfService: https://sportradar.com/terms/
+servers:
+- url: https://api.sportradar.com
+  description: Sportradar Push Feeds Production Server
+security:
+- apiKey: []
+tags:
+- name: Scores
+  description: Access live and historical game scores and match results.
+paths:
+  /nba/trial/v8/en/games/{game_id}/summary.json:
+    get:
+      operationId: getNbaGameSummary
+      summary: Get NBA Game Summary
+      description: Returns a complete summary of an NBA game including box score, team statistics, player statistics, and period-by-period scoring. Available for both completed and live games.
+      tags:
+      - Scores
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        description: The unique identifier for the NBA game.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing NBA game summary data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSummary'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Game not found.
+        '429':
+          description: Rate limit exceeded.
+  /soccer-t3/trial/v4/en/sport_events/{sport_event_id}/summary.json:
+    get:
+      operationId: getSoccerMatchSummary
+      summary: Get Soccer Match Summary
+      description: Returns a detailed summary of a soccer match including match timeline, scoreline, statistics, lineups, and incident data (goals, cards, substitutions).
+      tags:
+      - Scores
+      parameters:
+      - name: sport_event_id
+        in: path
+        required: true
+        description: The unique Sportradar ID for the sport event (e.g., sr:match:12345).
+        schema:
+          type: string
+      - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing match summary data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SportEventSummary'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Sport event not found.
+        '429':
+          description: Rate limit exceeded.
+  /nfl/trial/v7/en/games/{game_id}/summary.json:
+    get:
+      operationId: getNflGameSummary
+      summary: Get NFL Game Summary
+      description: Returns a complete NFL game summary including scoring drives, team statistics, individual player statistics, and game situation data.
+      tags:
+      - Scores
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        description: The unique identifier for the NFL game.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing NFL game summary data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSummary'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Game not found.
+        '429':
+          description: Rate limit exceeded.
+components:
+  schemas:
+    SportEvent:
+      type: object
+      description: Core sport event data.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar sport event identifier.
+        scheduled:
+          type: string
+          format: date-time
+          description: Scheduled start time.
+        competitors:
+          type: array
+          description: List of competing teams or players.
+          items:
+            $ref: '#/components/schemas/Competitor'
+        venue:
+          $ref: '#/components/schemas/Venue'
+    Competitor:
+      type: object
+      description: A team or player competing in a sport event.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar competitor identifier.
+        name:
+          type: string
+          description: Competitor name.
+        qualifier:
+          type: string
+          description: Role in the event (home or away).
+          enum:
+          - home
+          - away
+    Venue:
+      type: object
+      description: The venue where a game or match takes place.
+      properties:
+        id:
+          type: string
+          description: Unique venue identifier.
+        name:
+          type: string
+          description: Venue name.
+        city:
+          type: string
+          description: City where the venue is located.
+        country:
+          type: string
+          description: Country where the venue is located.
+        capacity:
+          type: integer
+          description: Seating capacity of the venue.
+    TeamScore:
+      type: object
+      description: Team score and identity within a game.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar team identifier.
+        name:
+          type: string
+          description: Full team name.
+        alias:
+          type: string
+          description: Team abbreviation.
+        points:
+          type: integer
+          description: Total points scored.
+    SportEventSummary:
+      type: object
+      description: Summary of a soccer match including scoreline and incidents.
+      properties:
+        sport_event:
+          $ref: '#/components/schemas/SportEvent'
+        sport_event_status:
+          $ref: '#/components/schemas/SportEventStatus'
+    GameSummary:
+      type: object
+      description: Summary data for a completed or live sports game including teams, scores, and statistics.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar identifier for the game.
+        status:
+          type: string
+          description: Game status (scheduled, inprogress, closed, cancelled, postponed).
+          enum:
+          - scheduled
+          - inprogress
+          - closed
+          - cancelled
+          - postponed
+        scheduled:
+          type: string
+          format: date-time
+          description: Scheduled start time in ISO 8601 format.
+        home:
+          $ref: '#/components/schemas/TeamScore'
+        away:
+          $ref: '#/components/schemas/TeamScore'
+        venue:
+          $ref: '#/components/schemas/Venue'
+    SportEventStatus:
+      type: object
+      description: Current status and score of a sport event.
+      properties:
+        status:
+          type: string
+          description: Current status of the sport event.
+        match_status:
+          type: string
+          description: Detailed match status (not_started, live, ended).
+        home_score:
+          type: integer
+          description: Home team score.
+        away_score:
+          type: integer
+          description: Away team score.
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Sportradar Push Feeds require an API key passed in the x-api-key request header. Push entitlements are tied to Realtime customer accounts.
+externalDocs:
+  description: Sportradar Push Feeds Documentation
+  url: https://developer.sportradar.com/getting-started/docs/get-started

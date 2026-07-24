@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Sportradar Push Feeds Competitors Standings API
+  description: Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.
+  version: v1
+  contact:
+    name: Sportradar Developer Support
+    url: https://developer.sportradar.com/docs/read/Home#support
+  termsOfService: https://sportradar.com/terms/
+servers:
+- url: https://api.sportradar.com
+  description: Sportradar Push Feeds Production Server
+security:
+- apiKey: []
+tags:
+- name: Standings
+  description: League and tournament standings, rankings, and tables.
+paths:
+  /nba/trial/v8/en/seasons/{season_year}/REG/standings.json:
+    get:
+      operationId: getNbaStandings
+      summary: Get NBA Standings
+      description: Returns current NBA standings for the specified season, including wins, losses, win percentage, conference and division rankings.
+      tags:
+      - Standings
+      parameters:
+      - name: season_year
+        in: path
+        required: true
+        description: The season year (e.g., 2024).
+        schema:
+          type: string
+          example: '2024'
+      - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing NBA standings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Standings'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+components:
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
+  schemas:
+    ConferenceStandings:
+      type: object
+      description: Conference-level standings.
+      properties:
+        id:
+          type: string
+          description: Conference identifier.
+        name:
+          type: string
+          description: Conference name.
+        teams:
+          type: array
+          description: Teams within the conference with their records.
+          items:
+            $ref: '#/components/schemas/TeamStanding'
+    TeamStanding:
+      type: object
+      description: A team's standing within a conference.
+      properties:
+        id:
+          type: string
+          description: Team identifier.
+        name:
+          type: string
+          description: Team name.
+        wins:
+          type: integer
+          description: Number of wins.
+        losses:
+          type: integer
+          description: Number of losses.
+        win_pct:
+          type: number
+          format: float
+          description: Win percentage.
+        rank:
+          type: integer
+          description: Conference rank.
+    Standings:
+      type: object
+      description: League standings data.
+      properties:
+        season:
+          type: object
+          description: Season metadata.
+          properties:
+            id:
+              type: string
+              description: Season identifier.
+            year:
+              type: integer
+              description: Season year.
+            type:
+              type: string
+              description: Season type (REG, PST, PRE).
+        conferences:
+          type: array
+          description: List of conferences with standings.
+          items:
+            $ref: '#/components/schemas/ConferenceStandings'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Sportradar Push Feeds require an API key passed in the x-api-key request header. Push entitlements are tied to Realtime customer accounts.
+externalDocs:
+  description: Sportradar Push Feeds Documentation
+  url: https://developer.sportradar.com/getting-started/docs/get-started
