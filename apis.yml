@@ -1,4 +1,18 @@
 aid: sportradar
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sportradar.png
 name: Sportradar
 description: Sportradar is the world's leading sports technology company, providing
   comprehensive sports data APIs delivering real-time scores, statistics, odds, and
@@ -25,32 +39,12 @@ tags:
 - Statistics
 - Streaming
 apis:
-- aid: sportradar:sports-data-api
-  name: Sportradar Sports Data API
-  description: Comprehensive sports data API providing real-time scores, statistics,
-    odds, and content covering 80+ sports, 500+ leagues, and 750,000+ annual events
-    in JSON and XML formats. Supports live score feeds, historical statistics, player
-    and team profiles, schedules, standings, and odds comparison across markets.
-  humanURL: https://developer.sportradar.com/
-  tags:
-  - Data
-  - Real-Time
-  - Sports
-  - Statistics
-  properties:
-  - type: Documentation
-    url: https://developer.sportradar.com/docs/read/Home
-  - type: GettingStarted
-    url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: OpenAPI
-    url: openapi/sportradar-sports-data-openapi.yml
-  - url: graphql/sportradar-graphql.md
-    type: GraphQL
 - aid: sportradar:nba-api
   name: Sportradar NBA API
-  description: Provides comprehensive NBA data including real-time play-by-play, box
-    scores, standings, team and player statistics, schedules, and injury reports.
-    Covers both regular season and playoffs with live game feeds and historical data.
+  description: >-
+    Provides comprehensive NBA data including real-time play-by-play, box scores, standings, team and
+    player statistics, schedules, and injury reports. Covers both regular season and playoffs with live
+    game feeds and historical data.
   humanURL: https://developer.sportradar.com/docs/read/basketball/NBA_v8
   tags:
   - Basketball
@@ -62,9 +56,9 @@ apis:
     url: https://developer.sportradar.com/docs/read/basketball/NBA_v8
 - aid: sportradar:nfl-api
   name: Sportradar NFL API
-  description: Delivers detailed NFL data including game summaries, play-by-play,
-    drive charts, team and player statistics, schedules, standings, and depth charts.
-    Supports live feeds and historical season data.
+  description: >-
+    Delivers detailed NFL data including game summaries, play-by-play, drive charts, team and player statistics,
+    schedules, standings, and depth charts. Supports live feeds and historical season data.
   humanURL: https://developer.sportradar.com/docs/read/american_football/NFL_v7
   tags:
   - American Football
@@ -76,10 +70,10 @@ apis:
     url: https://developer.sportradar.com/docs/read/american_football/NFL_v7
 - aid: sportradar:soccer-api
   name: Sportradar Soccer API
-  description: Covers 500+ soccer competitions globally, providing live match data,
-    match timelines, team and player statistics, standings, tournament coverage, and
-    detailed competition data for leagues like Premier League, La Liga, Bundesliga,
-    Champions League, and more.
+  description: >-
+    Covers 500+ soccer competitions globally, providing live match data, match timelines, team and player
+    statistics, standings, tournament coverage, and detailed competition data for leagues like Premier
+    League, La Liga, Bundesliga, Champions League, and more.
   humanURL: https://developer.sportradar.com/docs/read/soccer/Soccer_v4
   tags:
   - Real-Time
@@ -91,9 +85,9 @@ apis:
     url: https://developer.sportradar.com/docs/read/soccer/Soccer_v4
 - aid: sportradar:odds-api
   name: Sportradar Odds API
-  description: Provides pre-match and live odds comparison data from major sportsbooks
-    worldwide, including opening lines, closing lines, and line movement history for
-    sports betting applications and analytics platforms.
+  description: >-
+    Provides pre-match and live odds comparison data from major sportsbooks worldwide, including opening
+    lines, closing lines, and line movement history for sports betting applications and analytics platforms.
   humanURL: https://developer.sportradar.com/docs/read/odds_comparison/Odds_Comparison_v2
   tags:
   - Betting
@@ -103,22 +97,21 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.sportradar.com/docs/read/odds_comparison/Odds_Comparison_v2
-- aid: sportradar:push-feeds-api
-  name: Sportradar Push Feeds API
-  description: Real-time streaming surface delivered over HTTP chunked transfer encoding
-    for NFL, NBA, NHL, WNBA, and Soccer. Push Feeds emit JSON events, statistics,
-    clock updates, and draft activity on a long-lived HTTP connection, with a five-second
-    heartbeat when no new content is available. Push Feeds are available to Sportradar
-    Realtime customers as an add-on to the RESTful Sports Data APIs and are intended
-    to complement, not replace, the request/response APIs.
-  humanURL: https://developer.sportradar.com/getting-started/docs/get-started
+- aid: sportradar:sportradar-competitors-api
+  name: Sportradar Competitors API
+  description: Team and player profiles, rosters, and biographical information.
+  humanURL: https://developer.sportradar.com/
   tags:
-  - Streaming
-  - Push
-  - Real-Time
-  - Sports
-  - HTTP Chunked
+  - Competitors
   properties:
+  - type: OpenAPI
+    url: openapi/sportradar-competitors-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -131,8 +124,258 @@ apis:
     url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
   - type: Documentation
     url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-nba-push-api
+  name: Sportradar NBA Push API
+  description: >-
+    NBA Push Feeds deliver real-time play-by-play events, statistics, clock updates, and draft activity
+    over HTTP chunked streaming.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - NBA Push
+  properties:
   - type: OpenAPI
-    url: openapi/sportradar-push-feeds-openapi.yml
+    url: openapi/sportradar-nba-push-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-nfl-push-api
+  name: Sportradar NFL Push API
+  description: >-
+    NFL Push Feeds deliver real-time game events, statistics, pulse messages, and draft activity over
+    HTTP chunked streaming.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - NFL Push
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-nfl-push-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-nhl-push-api
+  name: Sportradar NHL Push API
+  description: >-
+    NHL Push Feeds deliver real-time game events, statistics, and enriched clock data over HTTP chunked
+    streaming.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - NHL Push
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-nhl-push-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-schedules-api
+  name: Sportradar Schedules API
+  description: Retrieve daily, weekly, and seasonal schedules for sports competitions.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - Schedules
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-schedules-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-scores-api
+  name: Sportradar Scores API
+  description: Access live and historical game scores and match results.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - Scores
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-scores-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-soccer-push-api
+  name: Sportradar Soccer Push API
+  description: >-
+    Soccer Push Feeds deliver real-time match events and statistics over HTTP chunked streaming for 500+
+    competitions worldwide.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - Soccer Push
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-soccer-push-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-standings-api
+  name: Sportradar Standings API
+  description: League and tournament standings, rankings, and tables.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - Standings
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-standings-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-statistics-api
+  name: Sportradar Statistics API
+  description: Team and player performance statistics across competitions and seasons.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - Statistics
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-statistics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+- aid: sportradar:sportradar-wnba-push-api
+  name: Sportradar WNBA Push API
+  description: >-
+    WNBA Push Feeds deliver real-time game events, statistics, and clock updates over HTTP chunked streaming.
+  humanURL: https://developer.sportradar.com/
+  tags:
+  - WNBA Push
+  properties:
+  - type: OpenAPI
+    url: openapi/sportradar-wnba-push-api-openapi.yml
+  - type: Documentation
+    url: https://developer.sportradar.com/docs/read/Home
+  - type: GettingStarted
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: GraphQL
+    url: graphql/sportradar-graphql.md
+  - type: Documentation
+    url: https://developer.sportradar.com/getting-started/docs/get-started
+  - type: Documentation
+    url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - type: Documentation
+    url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
 common:
 - type: AgenticAccess
   url: agentic-access/sportradar-agentic-access.yml
