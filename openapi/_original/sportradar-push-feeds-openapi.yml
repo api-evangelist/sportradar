@@ -1,0 +1,664 @@
+openapi: 3.1.0
+info:
+  title: Sportradar Push Feeds API
+  description: >-
+    Sportradar's Push Feeds deliver real-time sports data over HTTP using
+    chunked transfer encoding. A single long-lived HTTP connection streams
+    JSON-encoded events, statistics, clock updates, and draft activity for
+    live games. When no new content is available, the server sends a
+    heartbeat message every five seconds to keep the connection alive.
+    Push Feeds are an add-on service available to Sportradar Realtime
+    customers and are intended to complement, not replace, the RESTful
+    Sports Data APIs. Clients must follow HTTP redirects and accept
+    chunked transfer encoding. There are no documented limits on the
+    number of concurrent connections.
+  version: 'v1'
+  contact:
+    name: Sportradar Developer Support
+    url: https://developer.sportradar.com/docs/read/Home#support
+  termsOfService: https://sportradar.com/terms/
+externalDocs:
+  description: Sportradar Push Feeds Documentation
+  url: https://developer.sportradar.com/getting-started/docs/get-started
+servers:
+  - url: https://api.sportradar.com
+    description: Sportradar Push Feeds Production Server
+tags:
+  - name: NFL Push
+    description: >-
+      NFL Push Feeds deliver real-time game events, statistics, pulse
+      messages, and draft activity over HTTP chunked streaming.
+    externalDocs:
+      url: https://developer.sportradar.com/football/docs/nfl-ig-push
+  - name: NBA Push
+    description: >-
+      NBA Push Feeds deliver real-time play-by-play events, statistics,
+      clock updates, and draft activity over HTTP chunked streaming.
+    externalDocs:
+      url: https://developer.sportradar.com/basketball/docs/nba-ig-push
+  - name: NHL Push
+    description: >-
+      NHL Push Feeds deliver real-time game events, statistics, and
+      enriched clock data over HTTP chunked streaming.
+    externalDocs:
+      url: https://developer.sportradar.com/ice-hockey/docs/nhl-ig-push
+  - name: WNBA Push
+    description: >-
+      WNBA Push Feeds deliver real-time game events, statistics, and
+      clock updates over HTTP chunked streaming.
+    externalDocs:
+      url: https://developer.sportradar.com/basketball/docs/wnba-ig-push
+  - name: Soccer Push
+    description: >-
+      Soccer Push Feeds deliver real-time match events and statistics
+      over HTTP chunked streaming for 500+ competitions worldwide.
+    externalDocs:
+      url: https://developer.sportradar.com/soccer/docs/soccer-ig-push
+security:
+  - apiKey: []
+paths:
+  /nfl/official/{access_level}/stream/{language_code}/events/subscribe:
+    get:
+      operationId: subscribeNflPushEvents
+      summary: Subscribe to NFL Push Events
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        information on every live NFL game event as it occurs. Events
+        include scoring plays, drive updates, and other on-field
+        activity. Heartbeat messages are sent every five seconds when no
+        new events are available. Use the optional match filter to limit
+        the stream to a single game.
+      tags:
+        - NFL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nfl/official/{access_level}/stream/{language_code}/statistics/subscribe:
+    get:
+      operationId: subscribeNflPushStatistics
+      summary: Subscribe to NFL Push Statistics
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams detailed,
+        real-time game statistics at the team and player level. Heartbeat
+        messages are sent every five seconds when no new statistics are
+        available.
+      tags:
+        - NFL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nfl/official/{access_level}/stream/{language_code}/pulse/subscribe:
+    get:
+      operationId: subscribeNflPushPulse
+      summary: Subscribe to NFL Push Pulse
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        pulse messages describing on-field activity. Heartbeat messages
+        are sent every five seconds when no new content is available.
+      tags:
+        - NFL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nfl/official/{access_level}/stream/{language_code}/draft-picks/subscribe:
+    get:
+      operationId: subscribeNflPushDraftPicks
+      summary: Subscribe to NFL Push Draft Picks
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        NFL draft pick selections as they occur. Heartbeat messages are
+        sent every five seconds when no new picks are available.
+      tags:
+        - NFL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nfl/official/{access_level}/stream/{language_code}/draft-trades/subscribe:
+    get:
+      operationId: subscribeNflPushDraftTrades
+      summary: Subscribe to NFL Push Draft Trades
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams summary
+        details of all in-draft trades in real-time. Heartbeat messages
+        are sent every five seconds when no new trades are available.
+      tags:
+        - NFL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nba/{access_level}/stream/{language_code}/events/subscribe:
+    get:
+      operationId: subscribeNbaPushEvents
+      summary: Subscribe to NBA Push Events
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        NBA game events and play-by-play information. Heartbeat messages
+        are sent every five seconds when no new events are available.
+        Use the optional match filter to limit the stream to a single
+        game.
+      tags:
+        - NBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nba/{access_level}/stream/{language_code}/statistics/subscribe:
+    get:
+      operationId: subscribeNbaPushStatistics
+      summary: Subscribe to NBA Push Statistics
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        NBA team and player statistics updates. Heartbeat messages are
+        sent every five seconds when no new statistics are available.
+      tags:
+        - NBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nba/{access_level}/stream/{language_code}/clock/subscribe:
+    get:
+      operationId: subscribeNbaPushClock
+      summary: Subscribe to NBA Push Clock
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        game clock timing updates for NBA games. Heartbeat messages are
+        sent every five seconds when no new clock data is available.
+      tags:
+        - NBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nba/{access_level}/stream/{language_code}/draft_picks/subscribe:
+    get:
+      operationId: subscribeNbaPushDraftPicks
+      summary: Subscribe to NBA Push Draft Picks
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        NBA draft pick selections as they occur. Heartbeat messages are
+        sent every five seconds when no new picks are available.
+      tags:
+        - NBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nba/{access_level}/stream/{language_code}/draft_trades/subscribe:
+    get:
+      operationId: subscribeNbaPushDraftTrades
+      summary: Subscribe to NBA Push Draft Trades
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams summary
+        details of all in-draft NBA trades in real-time. Heartbeat
+        messages are sent every five seconds when no new trades are
+        available.
+      tags:
+        - NBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nhl/{access_level}/stream/{language_code}/events/subscribe:
+    get:
+      operationId: subscribeNhlPushEvents
+      summary: Subscribe to NHL Push Events
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        NHL game event details. Heartbeat messages are sent every five
+        seconds when no new events are available.
+      tags:
+        - NHL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nhl/{access_level}/stream/{language_code}/statistics/subscribe:
+    get:
+      operationId: subscribeNhlPushStatistics
+      summary: Subscribe to NHL Push Statistics
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        NHL team and player-level game statistics. Heartbeat messages
+        are sent every five seconds when no new statistics are available.
+      tags:
+        - NHL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /nhl/{access_level}/stream/{language_code}/push-clock/subscribe:
+    get:
+      operationId: subscribeNhlPushClock
+      summary: Subscribe to NHL Push Clock
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        NHL game clock updates, including scoring and strength data.
+        Heartbeat messages are sent every five seconds when no new clock
+        data is available.
+      tags:
+        - NHL Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/languageCodeParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /wnba/{access_level}/stream/events/subscribe:
+    get:
+      operationId: subscribeWnbaPushEvents
+      summary: Subscribe to WNBA Push Events
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        WNBA game events. Heartbeat messages are sent every five seconds
+        when no new events are available. Use the optional match filter
+        to limit the stream to a single game.
+      tags:
+        - WNBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /wnba/{access_level}/stream/statistics/subscribe:
+    get:
+      operationId: subscribeWnbaPushStatistics
+      summary: Subscribe to WNBA Push Statistics
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        WNBA team and player statistics. Heartbeat messages are sent
+        every five seconds when no new statistics are available.
+      tags:
+        - WNBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /wnba/{access_level}/stream/clock/subscribe:
+    get:
+      operationId: subscribeWnbaPushClock
+      summary: Subscribe to WNBA Push Clock
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        WNBA game clock updates. Heartbeat messages are sent every five
+        seconds when no new clock data is available.
+      tags:
+        - WNBA Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/matchFilterParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /soccer/{access_level}/{version}/stream/events/subscribe:
+    get:
+      operationId: subscribeSoccerPushEvents
+      summary: Subscribe to Soccer Push Events
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        match events across Sportradar's soccer coverage. Heartbeat
+        messages are sent every five seconds when no new events are
+        available. Use the optional sport_event_id filter to limit the
+        stream to a single match.
+      tags:
+        - Soccer Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/soccerVersionParam'
+        - name: sport_event_id
+          in: query
+          required: false
+          description: Limit the stream to a specific sport event identifier.
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: Response format. Defaults to JSON.
+          schema:
+            type: string
+            enum:
+              - json
+              - xml
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+  /soccer/{access_level}/{version}/stream/statistics/subscribe:
+    get:
+      operationId: subscribeSoccerPushStatistics
+      summary: Subscribe to Soccer Push Statistics
+      description: >-
+        Opens a long-lived HTTP chunked connection that streams real-time
+        soccer match statistics. Heartbeat messages are sent every five
+        seconds when no new statistics are available.
+      tags:
+        - Soccer Push
+      parameters:
+        - $ref: '#/components/parameters/accessLevelParam'
+        - $ref: '#/components/parameters/soccerVersionParam'
+        - name: sport_event_id
+          in: query
+          required: false
+          description: Limit the stream to a specific sport event identifier.
+          schema:
+            type: string
+        - name: format
+          in: query
+          required: false
+          description: Response format. Defaults to JSON.
+          schema:
+            type: string
+            enum:
+              - json
+              - xml
+      responses:
+        '200':
+          $ref: '#/components/responses/PushStream'
+        '302':
+          $ref: '#/components/responses/PushRedirect'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '403':
+          description: Forbidden - account is not entitled to Realtime push feeds.
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: >-
+        Sportradar Push Feeds require an API key passed in the x-api-key
+        request header. Push entitlements are tied to Realtime customer
+        accounts.
+
+  parameters:
+    accessLevelParam:
+      name: access_level
+      in: path
+      required: true
+      description: >-
+        Sportradar access level for the requested package. Trial
+        accounts use 'trial'; production customers use 'production'.
+      schema:
+        type: string
+        enum:
+          - trial
+          - production
+    languageCodeParam:
+      name: language_code
+      in: path
+      required: true
+      description: >-
+        Two-letter language code controlling localized text in the
+        feed (for example, 'en' for English).
+      schema:
+        type: string
+    soccerVersionParam:
+      name: version
+      in: path
+      required: true
+      description: Sportradar Soccer API version (for example, v4).
+      schema:
+        type: string
+    matchFilterParam:
+      name: match
+      in: query
+      required: false
+      description: >-
+        Optional filter that restricts the stream to a single game.
+        Provide the fully qualified Sportradar match identifier
+        (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b).
+      schema:
+        type: string
+
+  responses:
+    PushStream:
+      description: >-
+        Successful subscription. The server returns an open HTTP
+        connection with Transfer-Encoding chunked and continuously
+        emits JSON messages. Heartbeat messages are emitted every
+        five seconds when no other content is available.
+      headers:
+        Transfer-Encoding:
+          description: Always 'chunked' for Push Feed responses.
+          schema:
+            type: string
+            enum:
+              - chunked
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/Heartbeat'
+              - $ref: '#/components/schemas/PushPayload'
+    PushRedirect:
+      description: >-
+        Push Feed subscriptions begin with an HTTP redirect to the
+        streaming origin. Clients must follow the redirect within one
+        minute of the initial request.
+      headers:
+        Location:
+          description: URL of the streaming origin to follow.
+          schema:
+            type: string
+            format: uri
+
+  schemas:
+    Heartbeat:
+      type: object
+      description: >-
+        Heartbeat message emitted every five seconds when no new
+        content is available on the stream. Used by clients to confirm
+        the connection is still healthy.
+      properties:
+        heartbeat:
+          type: object
+          properties:
+            from:
+              type: integer
+              description: Start of the heartbeat window as a Unix timestamp.
+            to:
+              type: integer
+              description: End of the heartbeat window as a Unix timestamp.
+            interval:
+              type: integer
+              description: Heartbeat interval in seconds.
+              examples:
+                - 5
+            type:
+              type: string
+              description: Feed type the heartbeat is associated with.
+              examples:
+                - events
+                - statistics
+                - clock
+                - pulse
+            package:
+              type: string
+              description: Sportradar package emitting the heartbeat.
+              examples:
+                - soccer-v4
+                - nfl
+                - nba
+                - nhl
+                - wnba
+    PushPayload:
+      type: object
+      description: >-
+        Generic envelope describing a Push Feed payload. Each Sportradar
+        package defines the concrete metadata and payload shape; refer
+        to the package-specific documentation for field-level details.
+      properties:
+        metadata:
+          type: object
+          description: >-
+            Feed metadata describing the package, sport, event, and
+            sequence information for the message.
+          additionalProperties: true
+        payload:
+          type: object
+          description: >-
+            Package-specific payload such as an event, statistics
+            update, clock update, or draft activity.
+          additionalProperties: true

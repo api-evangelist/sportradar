@@ -1,0 +1,565 @@
+openapi: 3.1.0
+info:
+  title: Sportradar Sports Data API
+  description: >-
+    Sportradar's Sports Data API provides comprehensive access to real-time
+    and historical sports data covering 80+ sports and 500+ leagues worldwide.
+    The API delivers scores, statistics, standings, schedules, play-by-play
+    data, and odds information for media companies, sportsbooks, fantasy sports
+    platforms, and sports technology applications. All endpoints require an
+    API key passed as a query parameter. Data is available in JSON and XML formats.
+  version: 'v1'
+  contact:
+    name: Sportradar Developer Support
+    url: https://developer.sportradar.com/docs/read/Home#support
+  termsOfService: https://sportradar.com/terms/
+externalDocs:
+  description: Sportradar Developer Documentation
+  url: https://developer.sportradar.com/docs/read/Home
+servers:
+  - url: https://api.sportradar.com
+    description: Sportradar API Production Server
+tags:
+  - name: Schedules
+    description: >-
+      Retrieve daily, weekly, and seasonal schedules for sports competitions.
+  - name: Scores
+    description: >-
+      Access live and historical game scores and match results.
+  - name: Statistics
+    description: >-
+      Team and player performance statistics across competitions and seasons.
+  - name: Standings
+    description: >-
+      League and tournament standings, rankings, and tables.
+  - name: Competitors
+    description: >-
+      Team and player profiles, rosters, and biographical information.
+security:
+  - apiKey: []
+paths:
+  /nba/trial/v8/en/games/{game_id}/summary.json:
+    get:
+      operationId: getNbaGameSummary
+      summary: Get NBA Game Summary
+      description: >-
+        Returns a complete summary of an NBA game including box score, team
+        statistics, player statistics, and period-by-period scoring. Available
+        for both completed and live games.
+      tags:
+        - Scores
+      parameters:
+        - name: game_id
+          in: path
+          required: true
+          description: The unique identifier for the NBA game.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing NBA game summary data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSummary'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Game not found.
+        '429':
+          description: Rate limit exceeded.
+
+  /nba/trial/v8/en/games/{date}/schedule.json:
+    get:
+      operationId: getNbaDailySchedule
+      summary: Get NBA Daily Schedule
+      description: >-
+        Returns the schedule of NBA games for a specific date, including
+        game status, team matchups, venue information, and broadcast details.
+      tags:
+        - Schedules
+      parameters:
+        - name: date
+          in: path
+          required: true
+          description: The date in YYYY/MM/DD format.
+          schema:
+            type: string
+            example: "2024/01/15"
+        - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing the daily schedule.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailySchedule'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /nba/trial/v8/en/seasons/{season_year}/REG/standings.json:
+    get:
+      operationId: getNbaStandings
+      summary: Get NBA Standings
+      description: >-
+        Returns current NBA standings for the specified season, including wins,
+        losses, win percentage, conference and division rankings.
+      tags:
+        - Standings
+      parameters:
+        - name: season_year
+          in: path
+          required: true
+          description: The season year (e.g., 2024).
+          schema:
+            type: string
+            example: "2024"
+        - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing NBA standings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Standings'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '429':
+          description: Rate limit exceeded.
+
+  /soccer-t3/trial/v4/en/competitions/{competition_id}/info.json:
+    get:
+      operationId: getSoccerCompetitionInfo
+      summary: Get Soccer Competition Info
+      description: >-
+        Returns detailed information about a soccer competition including
+        category, sport, coverage information, and available seasons.
+      tags:
+        - Statistics
+      parameters:
+        - name: competition_id
+          in: path
+          required: true
+          description: The unique identifier for the competition (e.g., sr:competition:17 for Premier League).
+          schema:
+            type: string
+        - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing competition information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Competition'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Competition not found.
+        '429':
+          description: Rate limit exceeded.
+
+  /soccer-t3/trial/v4/en/sport_events/{sport_event_id}/summary.json:
+    get:
+      operationId: getSoccerMatchSummary
+      summary: Get Soccer Match Summary
+      description: >-
+        Returns a detailed summary of a soccer match including match timeline,
+        scoreline, statistics, lineups, and incident data (goals, cards, substitutions).
+      tags:
+        - Scores
+      parameters:
+        - name: sport_event_id
+          in: path
+          required: true
+          description: The unique Sportradar ID for the sport event (e.g., sr:match:12345).
+          schema:
+            type: string
+        - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing match summary data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SportEventSummary'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Sport event not found.
+        '429':
+          description: Rate limit exceeded.
+
+  /nfl/trial/v7/en/games/{game_id}/summary.json:
+    get:
+      operationId: getNflGameSummary
+      summary: Get NFL Game Summary
+      description: >-
+        Returns a complete NFL game summary including scoring drives, team
+        statistics, individual player statistics, and game situation data.
+      tags:
+        - Scores
+      parameters:
+        - name: game_id
+          in: path
+          required: true
+          description: The unique identifier for the NFL game.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing NFL game summary data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSummary'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Game not found.
+        '429':
+          description: Rate limit exceeded.
+
+  /nba/trial/v8/en/players/{player_id}/profile.json:
+    get:
+      operationId: getNbaPlayerProfile
+      summary: Get NBA Player Profile
+      description: >-
+        Returns biographical and statistical profile information for an NBA
+        player including career statistics, current season averages, and team history.
+      tags:
+        - Competitors
+      parameters:
+        - name: player_id
+          in: path
+          required: true
+          description: The unique Sportradar player identifier.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/apiKeyParam'
+      responses:
+        '200':
+          description: Successful response containing player profile data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerProfile'
+        '401':
+          description: Unauthorized - invalid or missing API key.
+        '404':
+          description: Player not found.
+        '429':
+          description: Rate limit exceeded.
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+      description: >-
+        Sportradar API key passed as a query parameter. Obtain from the
+        Sportradar developer portal.
+
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
+
+  schemas:
+    GameSummary:
+      type: object
+      description: >-
+        Summary data for a completed or live sports game including teams,
+        scores, and statistics.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar identifier for the game.
+        status:
+          type: string
+          description: Game status (scheduled, inprogress, closed, cancelled, postponed).
+          enum:
+            - scheduled
+            - inprogress
+            - closed
+            - cancelled
+            - postponed
+        scheduled:
+          type: string
+          format: date-time
+          description: Scheduled start time in ISO 8601 format.
+        home:
+          $ref: '#/components/schemas/TeamScore'
+        away:
+          $ref: '#/components/schemas/TeamScore'
+        venue:
+          $ref: '#/components/schemas/Venue'
+
+    TeamScore:
+      type: object
+      description: Team score and identity within a game.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar team identifier.
+        name:
+          type: string
+          description: Full team name.
+        alias:
+          type: string
+          description: Team abbreviation.
+        points:
+          type: integer
+          description: Total points scored.
+
+    DailySchedule:
+      type: object
+      description: Schedule of games for a specific date.
+      properties:
+        date:
+          type: string
+          format: date
+          description: The schedule date.
+        games:
+          type: array
+          description: List of scheduled games for the date.
+          items:
+            $ref: '#/components/schemas/ScheduledGame'
+
+    ScheduledGame:
+      type: object
+      description: Basic information about a scheduled game.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar game identifier.
+        status:
+          type: string
+          description: Game status.
+        scheduled:
+          type: string
+          format: date-time
+          description: Scheduled tip-off or kickoff time.
+        home:
+          $ref: '#/components/schemas/TeamRef'
+        away:
+          $ref: '#/components/schemas/TeamRef'
+        venue:
+          $ref: '#/components/schemas/Venue'
+
+    TeamRef:
+      type: object
+      description: Reference to a team.
+      properties:
+        id:
+          type: string
+          description: Unique team identifier.
+        name:
+          type: string
+          description: Team name.
+        alias:
+          type: string
+          description: Team abbreviation.
+
+    Standings:
+      type: object
+      description: League standings data.
+      properties:
+        season:
+          type: object
+          description: Season metadata.
+          properties:
+            id:
+              type: string
+              description: Season identifier.
+            year:
+              type: integer
+              description: Season year.
+            type:
+              type: string
+              description: Season type (REG, PST, PRE).
+        conferences:
+          type: array
+          description: List of conferences with standings.
+          items:
+            $ref: '#/components/schemas/ConferenceStandings'
+
+    ConferenceStandings:
+      type: object
+      description: Conference-level standings.
+      properties:
+        id:
+          type: string
+          description: Conference identifier.
+        name:
+          type: string
+          description: Conference name.
+        teams:
+          type: array
+          description: Teams within the conference with their records.
+          items:
+            $ref: '#/components/schemas/TeamStanding'
+
+    TeamStanding:
+      type: object
+      description: A team's standing within a conference.
+      properties:
+        id:
+          type: string
+          description: Team identifier.
+        name:
+          type: string
+          description: Team name.
+        wins:
+          type: integer
+          description: Number of wins.
+        losses:
+          type: integer
+          description: Number of losses.
+        win_pct:
+          type: number
+          format: float
+          description: Win percentage.
+        rank:
+          type: integer
+          description: Conference rank.
+
+    Competition:
+      type: object
+      description: Soccer competition information.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar competition identifier (e.g., sr:competition:17).
+        name:
+          type: string
+          description: Competition name (e.g., Premier League).
+        category:
+          type: object
+          description: Geographic category of the competition.
+          properties:
+            id:
+              type: string
+              description: Category identifier.
+            name:
+              type: string
+              description: Category name (e.g., England).
+
+    SportEventSummary:
+      type: object
+      description: Summary of a soccer match including scoreline and incidents.
+      properties:
+        sport_event:
+          $ref: '#/components/schemas/SportEvent'
+        sport_event_status:
+          $ref: '#/components/schemas/SportEventStatus'
+
+    SportEvent:
+      type: object
+      description: Core sport event data.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar sport event identifier.
+        scheduled:
+          type: string
+          format: date-time
+          description: Scheduled start time.
+        competitors:
+          type: array
+          description: List of competing teams or players.
+          items:
+            $ref: '#/components/schemas/Competitor'
+        venue:
+          $ref: '#/components/schemas/Venue'
+
+    SportEventStatus:
+      type: object
+      description: Current status and score of a sport event.
+      properties:
+        status:
+          type: string
+          description: Current status of the sport event.
+        match_status:
+          type: string
+          description: Detailed match status (not_started, live, ended).
+        home_score:
+          type: integer
+          description: Home team score.
+        away_score:
+          type: integer
+          description: Away team score.
+
+    Competitor:
+      type: object
+      description: A team or player competing in a sport event.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar competitor identifier.
+        name:
+          type: string
+          description: Competitor name.
+        qualifier:
+          type: string
+          description: Role in the event (home or away).
+          enum:
+            - home
+            - away
+
+    Venue:
+      type: object
+      description: The venue where a game or match takes place.
+      properties:
+        id:
+          type: string
+          description: Unique venue identifier.
+        name:
+          type: string
+          description: Venue name.
+        city:
+          type: string
+          description: City where the venue is located.
+        country:
+          type: string
+          description: Country where the venue is located.
+        capacity:
+          type: integer
+          description: Seating capacity of the venue.
+
+    PlayerProfile:
+      type: object
+      description: Player biographical and statistical profile.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar player identifier.
+        full_name:
+          type: string
+          description: Player's full name.
+        position:
+          type: string
+          description: Player's position.
+        team:
+          $ref: '#/components/schemas/TeamRef'
+        height:
+          type: integer
+          description: Player height in inches.
+        weight:
+          type: integer
+          description: Player weight in pounds.
+        birth_date:
+          type: string
+          format: date
+          description: Player's birth date.
+        experience:
+          type: string
+          description: Player experience level.

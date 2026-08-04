@@ -1,0 +1,32 @@
+{
+  "provider": "sportradar",
+  "sources": [
+    "sportradar-competitors-api-openapi.yml",
+    "sportradar-nba-push-api-openapi.yml",
+    "sportradar-nfl-push-api-openapi.yml",
+    "sportradar-nhl-push-api-openapi.yml",
+    "sportradar-schedules-api-openapi.yml",
+    "sportradar-scores-api-openapi.yml",
+    "sportradar-soccer-push-api-openapi.yml",
+    "sportradar-standings-api-openapi.yml",
+    "sportradar-statistics-api-openapi.yml",
+    "sportradar-wnba-push-api-openapi.yml"
+  ],
+  "outputs": [
+    "sportradar-competitors-api-openapi.yml",
+    "sportradar-nba-push-api-openapi.yml",
+    "sportradar-nfl-push-api-openapi.yml",
+    "sportradar-nhl-push-api-openapi.yml",
+    "sportradar-schedules-api-openapi.yml",
+    "sportradar-scores-api-openapi.yml",
+    "sportradar-soccer-push-api-openapi.yml",
+    "sportradar-standings-api-openapi.yml",
+    "sportradar-statistics-api-openapi.yml",
+    "sportradar-wnba-push-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
