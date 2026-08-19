@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Push Feeds Competitors NFL Push API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NFL Push",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/events/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time information on every live NFL game event as it occurs. Events include scoring plays, drive updates, and other on-field activity. Heartbeat messages are sent every five seconds when no new events are available. Use the optional match filter to limit the stream to a single game."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/statistics/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams detailed, real-time game statistics at the team and player level. Heartbeat messages are sent every five seconds when no new statistics are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Pulse",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/pulse/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              },
+              {
+                "name": "match",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time pulse messages describing on-field activity. Heartbeat messages are sent every five seconds when no new content is available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Draft Picks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/draft-picks/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time NFL draft pick selections as they occur. Heartbeat messages are sent every five seconds when no new picks are available."
+        },
+        {
+          "info": {
+            "name": "Subscribe to NFL Push Draft Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/official/:access_level/stream/:language_code/draft-trades/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "language_code",
+                "value": "",
+                "type": "path",
+                "description": "Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams summary details of all in-draft trades in real-time. Heartbeat messages are sent every five seconds when no new trades are available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

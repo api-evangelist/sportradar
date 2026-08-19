@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Push Feeds Competitors Soccer Push API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Soccer Push",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to Soccer Push Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer/:access_level/:version/stream/events/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar Soccer API version (for example, v4)."
+              },
+              {
+                "name": "sport_event_id",
+                "value": "",
+                "type": "query",
+                "description": "Limit the stream to a specific sport event identifier."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to JSON."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time match events across Sportradar's soccer coverage. Heartbeat messages are sent every five seconds when no new events are available. Use the optional sport_event_id filter to limit the stream to a single match."
+        },
+        {
+          "info": {
+            "name": "Subscribe to Soccer Push Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer/:access_level/:version/stream/statistics/subscribe",
+            "params": [
+              {
+                "name": "access_level",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Sportradar Soccer API version (for example, v4)."
+              },
+              {
+                "name": "sport_event_id",
+                "value": "",
+                "type": "query",
+                "description": "Limit the stream to a specific sport event identifier."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to JSON."
+              }
+            ]
+          },
+          "docs": "Opens a long-lived HTTP chunked connection that streams real-time soccer match statistics. Heartbeat messages are sent every five seconds when no new statistics are available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

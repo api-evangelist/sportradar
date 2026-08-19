@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "bbb4b756-8d8f-4d6c-8434-b2f998f8ab61",
+      "name": "Schedules",
+      "description": {
+        "content": "Retrieve daily, weekly, and seasonal schedules for sports competitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bcb7b80a-4217-46e7-8910-9281d40bec8b",
+          "name": "Get NBA Daily Schedule",
+          "request": {
+            "name": "Get NBA Daily Schedule",
+            "description": {
+              "content": "Returns the schedule of NBA games for a specific date, including game status, team matchups, venue information, and broadcast details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nba",
+                "trial",
+                "v8",
+                "en",
+                "games",
+                ":date",
+                "schedule.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Sportradar API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "date",
+                  "description": "(Required) The date in YYYY/MM/DD format."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db769bea-6570-49a3-98f5-672ff09c16c8",
+              "name": "Successful response containing the daily schedule.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "games",
+                    ":date",
+                    "schedule.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) The date in YYYY/MM/DD format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date\": \"1989-06-09\",\n  \"games\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"scheduled\": \"1990-02-24T17:58:26.988Z\",\n      \"home\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"alias\": \"string\"\n      },\n      \"away\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"alias\": \"string\"\n      },\n      \"venue\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"capacity\": 21\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"scheduled\": \"2024-09-18T07:31:14.307Z\",\n      \"home\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"alias\": \"string\"\n      },\n      \"away\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"alias\": \"string\"\n      },\n      \"venue\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"capacity\": 6417\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a847a898-6200-4bbc-b9af-21fb98737d15",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "games",
+                    ":date",
+                    "schedule.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) The date in YYYY/MM/DD format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "023cbaee-c7c3-473b-b424-26b5828c4676",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "games",
+                    ":date",
+                    "schedule.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) The date in YYYY/MM/DD format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sportradar.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cac26fad-c6a1-4b40-9324-add93f65b303",
+    "name": "Sportradar Push Feeds Competitors Schedules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.\n\nContact Support:\n Name: Sportradar Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

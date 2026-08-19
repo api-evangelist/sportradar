@@ -1,0 +1,1690 @@
+{
+  "item": [
+    {
+      "id": "18d8d263-91ee-4a25-a780-8a9e44f5d44d",
+      "name": "NFL Push",
+      "description": {
+        "content": "NFL Push Feeds deliver real-time game events, statistics, pulse messages, and draft activity over HTTP chunked streaming.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f3ae2e2-face-4b65-aa37-895cd81beb88",
+          "name": "Subscribe to NFL Push Events",
+          "request": {
+            "name": "Subscribe to NFL Push Events",
+            "description": {
+              "content": "Opens a long-lived HTTP chunked connection that streams real-time information on every live NFL game event as it occurs. Events include scoring plays, drive updates, and other on-field activity. Heartbeat messages are sent every five seconds when no new events are available. Use the optional match filter to limit the stream to a single game.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "official",
+                ":access_level",
+                "stream",
+                ":language_code",
+                "events",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "match",
+                  "value": "<string>",
+                  "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_level",
+                  "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "language_code",
+                  "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e1294bf-9a16-4453-8628-b11334ec2e21",
+              "name": "Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Always 'chunked' for Push Feed responses.",
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"heartbeat\": {\n    \"from\": 7852,\n    \"to\": 5640,\n    \"interval\": 5,\n    \"type\": \"events\",\n    \"package\": \"soccer-v4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6afcaab-00e9-4197-ac65-66da499d4f3f",
+              "name": "Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the streaming origin to follow.",
+                  "key": "Location",
+                  "value": "http://CWMgmRlGpdgjLrcpcscElgZjT.myvrK9T1Ds2PrL1vC.KHZShMt-aOl9IOkpe65xVq-+KQmf59iHXEkRI"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3858949-d390-4dc3-ab2e-2820c6bde89f",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb059df5-fcee-4320-b42b-3c3601fffcc7",
+              "name": "Forbidden - account is not entitled to Realtime push feeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5daac592-2544-4814-bfcf-8eecbfc98ca5",
+          "name": "Subscribe to NFL Push Statistics",
+          "request": {
+            "name": "Subscribe to NFL Push Statistics",
+            "description": {
+              "content": "Opens a long-lived HTTP chunked connection that streams detailed, real-time game statistics at the team and player level. Heartbeat messages are sent every five seconds when no new statistics are available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "official",
+                ":access_level",
+                "stream",
+                ":language_code",
+                "statistics",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "match",
+                  "value": "<string>",
+                  "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_level",
+                  "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "language_code",
+                  "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6ae0afc-3c06-49ed-b6a7-01fe9a22182c",
+              "name": "Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Always 'chunked' for Push Feed responses.",
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"heartbeat\": {\n    \"from\": 7852,\n    \"to\": 5640,\n    \"interval\": 5,\n    \"type\": \"events\",\n    \"package\": \"soccer-v4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b12a0d-d4ca-4542-aa46-d634f4cc2572",
+              "name": "Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the streaming origin to follow.",
+                  "key": "Location",
+                  "value": "http://CWMgmRlGpdgjLrcpcscElgZjT.myvrK9T1Ds2PrL1vC.KHZShMt-aOl9IOkpe65xVq-+KQmf59iHXEkRI"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54b83cd4-82a9-4888-9326-cd6a347abc25",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "34af3f0d-ca43-4a1f-a31e-9936347e2d9b",
+              "name": "Forbidden - account is not entitled to Realtime push feeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e34badb-1bc0-452d-91d3-e20fb0f93db8",
+          "name": "Subscribe to NFL Push Pulse",
+          "request": {
+            "name": "Subscribe to NFL Push Pulse",
+            "description": {
+              "content": "Opens a long-lived HTTP chunked connection that streams real-time pulse messages describing on-field activity. Heartbeat messages are sent every five seconds when no new content is available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "official",
+                ":access_level",
+                "stream",
+                ":language_code",
+                "pulse",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "match",
+                  "value": "<string>",
+                  "description": "Optional filter that restricts the stream to a single game. Provide the fully qualified Sportradar match identifier (for example, sd:match:b9cf745b-36a1-404e-8159-78d719742a6b)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_level",
+                  "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "language_code",
+                  "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fbba2a1-8624-4206-832d-e88669df4eb3",
+              "name": "Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "pulse",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Always 'chunked' for Push Feed responses.",
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"heartbeat\": {\n    \"from\": 7852,\n    \"to\": 5640,\n    \"interval\": 5,\n    \"type\": \"events\",\n    \"package\": \"soccer-v4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe7ee23b-08e6-437c-92c8-06f7d882290d",
+              "name": "Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "pulse",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the streaming origin to follow.",
+                  "key": "Location",
+                  "value": "http://CWMgmRlGpdgjLrcpcscElgZjT.myvrK9T1Ds2PrL1vC.KHZShMt-aOl9IOkpe65xVq-+KQmf59iHXEkRI"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bfb2381d-8651-4ed2-bec7-01f4cd3078c0",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "pulse",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57350553-6a19-482e-b720-3b96c0b023dd",
+              "name": "Forbidden - account is not entitled to Realtime push feeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "pulse",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "match",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3db01afd-74e1-4676-8fed-736c2778ae20",
+          "name": "Subscribe to NFL Push Draft Picks",
+          "request": {
+            "name": "Subscribe to NFL Push Draft Picks",
+            "description": {
+              "content": "Opens a long-lived HTTP chunked connection that streams real-time NFL draft pick selections as they occur. Heartbeat messages are sent every five seconds when no new picks are available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "official",
+                ":access_level",
+                "stream",
+                ":language_code",
+                "draft-picks",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_level",
+                  "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "language_code",
+                  "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fa5c36e-5aee-41a0-96b1-a5d28e5c8be5",
+              "name": "Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-picks",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Always 'chunked' for Push Feed responses.",
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"heartbeat\": {\n    \"from\": 7852,\n    \"to\": 5640,\n    \"interval\": 5,\n    \"type\": \"events\",\n    \"package\": \"soccer-v4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4402577-8fb3-42ec-b227-3f7ea9ea3077",
+              "name": "Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-picks",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the streaming origin to follow.",
+                  "key": "Location",
+                  "value": "http://CWMgmRlGpdgjLrcpcscElgZjT.myvrK9T1Ds2PrL1vC.KHZShMt-aOl9IOkpe65xVq-+KQmf59iHXEkRI"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4b80465-eda4-40d1-bd1d-98f5e55f62ef",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-picks",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "83a17925-3bc5-4c31-80d8-da43e06f3d24",
+              "name": "Forbidden - account is not entitled to Realtime push feeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-picks",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f64bf0e-875d-43aa-9aef-03483d464742",
+          "name": "Subscribe to NFL Push Draft Trades",
+          "request": {
+            "name": "Subscribe to NFL Push Draft Trades",
+            "description": {
+              "content": "Opens a long-lived HTTP chunked connection that streams summary details of all in-draft trades in real-time. Heartbeat messages are sent every five seconds when no new trades are available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "official",
+                ":access_level",
+                "stream",
+                ":language_code",
+                "draft-trades",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_level",
+                  "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "language_code",
+                  "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2e351f1-6286-49de-a3eb-420617416db1",
+              "name": "Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-trades",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Always 'chunked' for Push Feed responses.",
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"heartbeat\": {\n    \"from\": 7852,\n    \"to\": 5640,\n    \"interval\": 5,\n    \"type\": \"events\",\n    \"package\": \"soccer-v4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60fc9277-7bab-44b1-90ba-8ba1214a61d5",
+              "name": "Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-trades",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the streaming origin to follow.",
+                  "key": "Location",
+                  "value": "http://CWMgmRlGpdgjLrcpcscElgZjT.myvrK9T1Ds2PrL1vC.KHZShMt-aOl9IOkpe65xVq-+KQmf59iHXEkRI"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9628dde5-7eab-4463-8416-f0174e5c1f2a",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-trades",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea69fa40-5562-4cc1-90d3-0170708f75dd",
+              "name": "Forbidden - account is not entitled to Realtime push feeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "official",
+                    ":access_level",
+                    "stream",
+                    ":language_code",
+                    "draft-trades",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "language_code",
+                      "description": "(Required) Two-letter language code controlling localized text in the feed (for example, 'en' for English)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sportradar.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5454059b-01ae-4b20-9ca9-ab5098ceae02",
+    "name": "Sportradar Push Feeds Competitors NFL Push API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.\n\nContact Support:\n Name: Sportradar Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

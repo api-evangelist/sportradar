@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "7e141d3b-ea10-4f68-bfaf-c6584e93cf6a",
+      "name": "Competitors",
+      "description": {
+        "content": "Team and player profiles, rosters, and biographical information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b66f9789-73e6-4de1-8e57-47c304b23b3c",
+          "name": "Get NBA Player Profile",
+          "request": {
+            "name": "Get NBA Player Profile",
+            "description": {
+              "content": "Returns biographical and statistical profile information for an NBA player including career statistics, current season averages, and team history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nba",
+                "trial",
+                "v8",
+                "en",
+                "players",
+                ":player_id",
+                "profile.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Sportradar API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "player_id",
+                  "description": "(Required) The unique Sportradar player identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "442e3652-e5fd-48d6-9a12-361b2beca5c5",
+              "name": "Successful response containing player profile data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "players",
+                    ":player_id",
+                    "profile.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_id",
+                      "description": "(Required) The unique Sportradar player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"full_name\": \"string\",\n  \"position\": \"string\",\n  \"team\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"alias\": \"string\"\n  },\n  \"height\": 1665,\n  \"weight\": 609,\n  \"birth_date\": \"2016-12-24\",\n  \"experience\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "447e2b26-219d-4a52-b45e-50388f7cd2f8",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "players",
+                    ":player_id",
+                    "profile.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_id",
+                      "description": "(Required) The unique Sportradar player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ccf8650-1353-48fb-ad5e-c38bd9704ba1",
+              "name": "Player not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "players",
+                    ":player_id",
+                    "profile.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_id",
+                      "description": "(Required) The unique Sportradar player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7eb10bb3-21b9-48e7-adc2-87fd8e5f4589",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "players",
+                    ":player_id",
+                    "profile.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_id",
+                      "description": "(Required) The unique Sportradar player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sportradar.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "20d6dfef-33b0-4b95-bcdc-e1b51507de53",
+    "name": "Sportradar Push Feeds Competitors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.\n\nContact Support:\n Name: Sportradar Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

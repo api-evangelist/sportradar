@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Push Feeds Competitors API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Competitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NBA Player Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/trial/v8/en/players/:player_id/profile.json",
+            "params": [
+              {
+                "name": "player_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique Sportradar player identifier."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns biographical and statistical profile information for an NBA player including career statistics, current season averages, and team history."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

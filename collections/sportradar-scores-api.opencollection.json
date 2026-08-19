@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Push Feeds Competitors Scores API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NBA Game Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/trial/v8/en/games/:game_id/summary.json",
+            "params": [
+              {
+                "name": "game_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the NBA game."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns a complete summary of an NBA game including box score, team statistics, player statistics, and period-by-period scoring. Available for both completed and live games."
+        },
+        {
+          "info": {
+            "name": "Get Soccer Match Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer-t3/trial/v4/en/sport_events/:sport_event_id/summary.json",
+            "params": [
+              {
+                "name": "sport_event_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique Sportradar ID for the sport event (e.g., sr:match:12345)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns a detailed summary of a soccer match including match timeline, scoreline, statistics, lineups, and incident data (goals, cards, substitutions)."
+        },
+        {
+          "info": {
+            "name": "Get NFL Game Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nfl/trial/v7/en/games/:game_id/summary.json",
+            "params": [
+              {
+                "name": "game_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the NFL game."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns a complete NFL game summary including scoring drives, team statistics, individual player statistics, and game situation data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

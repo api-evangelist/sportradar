@@ -1,0 +1,761 @@
+{
+  "item": [
+    {
+      "id": "f4762492-65eb-4e60-afa2-857e857cf7ac",
+      "name": "Soccer Push",
+      "description": {
+        "content": "Soccer Push Feeds deliver real-time match events and statistics over HTTP chunked streaming for 500+ competitions worldwide.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cca0a429-2e25-4cfb-b411-d6d54a23da15",
+          "name": "Subscribe to Soccer Push Events",
+          "request": {
+            "name": "Subscribe to Soccer Push Events",
+            "description": {
+              "content": "Opens a long-lived HTTP chunked connection that streams real-time match events across Sportradar's soccer coverage. Heartbeat messages are sent every five seconds when no new events are available. Use the optional sport_event_id filter to limit the stream to a single match.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "soccer",
+                ":access_level",
+                ":version",
+                "stream",
+                "events",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sport_event_id",
+                  "value": "<string>",
+                  "description": "Limit the stream to a specific sport event identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format. Defaults to JSON."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_level",
+                  "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version",
+                  "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53fac3ca-593c-4ac3-bf19-018367b7a94b",
+              "name": "Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Always 'chunked' for Push Feed responses.",
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"heartbeat\": {\n    \"from\": 5829,\n    \"to\": 1104,\n    \"interval\": 5,\n    \"type\": \"events\",\n    \"package\": \"soccer-v4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ceb863e-f123-409d-a7ee-de3a6e7dffe2",
+              "name": "Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the streaming origin to follow.",
+                  "key": "Location",
+                  "value": "http://xJCXDv.aykXvyVXL9dYEviXZFQs-kvqIoTuv2cd"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebef5c06-8d65-459d-b05b-657c4b9cd7e9",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05753f2d-e76c-4e12-a932-34f0c3621e18",
+              "name": "Forbidden - account is not entitled to Realtime push feeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "events",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "692f7bbe-fa10-4b8e-bbc6-45f59d90700d",
+          "name": "Subscribe to Soccer Push Statistics",
+          "request": {
+            "name": "Subscribe to Soccer Push Statistics",
+            "description": {
+              "content": "Opens a long-lived HTTP chunked connection that streams real-time soccer match statistics. Heartbeat messages are sent every five seconds when no new statistics are available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "soccer",
+                ":access_level",
+                ":version",
+                "stream",
+                "statistics",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sport_event_id",
+                  "value": "<string>",
+                  "description": "Limit the stream to a specific sport event identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format. Defaults to JSON."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "access_level",
+                  "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version",
+                  "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b81cda12-fecc-4e1a-ad23-705b80875929",
+              "name": "Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Always 'chunked' for Push Feed responses.",
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"heartbeat\": {\n    \"from\": 5829,\n    \"to\": 1104,\n    \"interval\": 5,\n    \"type\": \"events\",\n    \"package\": \"soccer-v4\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6b4fe49-366c-4e0d-b4fe-92780a83520a",
+              "name": "Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the streaming origin to follow.",
+                  "key": "Location",
+                  "value": "http://xJCXDv.aykXvyVXL9dYEviXZFQs-kvqIoTuv2cd"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50e32c63-6589-40e5-819c-ee574aa11706",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a8ddf07-4074-4f7d-8169-3e8f63fdc015",
+              "name": "Forbidden - account is not entitled to Realtime push feeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer",
+                    ":access_level",
+                    ":version",
+                    "stream",
+                    "statistics",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sport_event_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "access_level",
+                      "description": "(Required) Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version",
+                      "description": "(Required) Sportradar Soccer API version (for example, v4)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sportradar.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c35f6e07-c5ee-41bb-b42a-cf05dcc04b2a",
+    "name": "Sportradar Push Feeds Competitors Soccer Push API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.\n\nContact Support:\n Name: Sportradar Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

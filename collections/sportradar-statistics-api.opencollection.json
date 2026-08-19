@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Push Feeds Competitors Statistics API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Soccer Competition Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/soccer-t3/trial/v4/en/competitions/:competition_id/info.json",
+            "params": [
+              {
+                "name": "competition_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the competition (e.g., sr:competition:17 for Premier League)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a soccer competition including category, sport, coverage information, and available seasons."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

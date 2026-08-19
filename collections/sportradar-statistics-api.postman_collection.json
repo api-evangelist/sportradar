@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "1bcf36ad-5e8b-44e6-90f3-a6c116bda437",
+      "name": "Statistics",
+      "description": {
+        "content": "Team and player performance statistics across competitions and seasons.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "39490562-0721-488d-b3ee-00dcccc21fe1",
+          "name": "Get Soccer Competition Info",
+          "request": {
+            "name": "Get Soccer Competition Info",
+            "description": {
+              "content": "Returns detailed information about a soccer competition including category, sport, coverage information, and available seasons.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "soccer-t3",
+                "trial",
+                "v4",
+                "en",
+                "competitions",
+                ":competition_id",
+                "info.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Sportradar API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "competition_id",
+                  "description": "(Required) The unique identifier for the competition (e.g., sr:competition:17 for Premier League)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d46a9482-3965-4b50-9a98-474b8c3b4aaf",
+              "name": "Successful response containing competition information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "competitions",
+                    ":competition_id",
+                    "info.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "competition_id",
+                      "description": "(Required) The unique identifier for the competition (e.g., sr:competition:17 for Premier League)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"category\": {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67f748b0-6012-4d59-8eee-f04adf3043d0",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "competitions",
+                    ":competition_id",
+                    "info.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "competition_id",
+                      "description": "(Required) The unique identifier for the competition (e.g., sr:competition:17 for Premier League)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95cfd163-7feb-4066-aa81-fc37e17643ff",
+              "name": "Competition not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "competitions",
+                    ":competition_id",
+                    "info.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "competition_id",
+                      "description": "(Required) The unique identifier for the competition (e.g., sr:competition:17 for Premier League)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d1f6d6e-a8bd-4c92-8ff7-c55171677d48",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "competitions",
+                    ":competition_id",
+                    "info.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "competition_id",
+                      "description": "(Required) The unique identifier for the competition (e.g., sr:competition:17 for Premier League)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sportradar.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4a0da7cd-0f84-4b93-b033-35e4b5c4b925",
+    "name": "Sportradar Push Feeds Competitors Statistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.\n\nContact Support:\n Name: Sportradar Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

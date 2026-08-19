@@ -1,0 +1,287 @@
+{
+  "item": [
+    {
+      "id": "b9638e2c-30e4-4041-9fad-e4c9dc0f0f29",
+      "name": "Standings",
+      "description": {
+        "content": "League and tournament standings, rankings, and tables.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da9f2954-1da4-4d08-9c10-fb4d51aba3c0",
+          "name": "Get NBA Standings",
+          "request": {
+            "name": "Get NBA Standings",
+            "description": {
+              "content": "Returns current NBA standings for the specified season, including wins, losses, win percentage, conference and division rankings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nba",
+                "trial",
+                "v8",
+                "en",
+                "seasons",
+                ":season_year",
+                "REG",
+                "standings.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Sportradar API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "season_year",
+                  "description": "(Required) The season year (e.g., 2024)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c24f4ed8-aba7-444e-a8f9-f36e1487a887",
+              "name": "Successful response containing NBA standings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "seasons",
+                    ":season_year",
+                    "REG",
+                    "standings.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "season_year",
+                      "description": "(Required) The season year (e.g., 2024)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"season\": {\n    \"id\": \"string\",\n    \"year\": 494,\n    \"type\": \"string\"\n  },\n  \"conferences\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"teams\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"wins\": 1433,\n          \"losses\": 8345,\n          \"win_pct\": 8210.953008575749,\n          \"rank\": 3801\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"wins\": 393,\n          \"losses\": 8230,\n          \"win_pct\": 7774.98656747216,\n          \"rank\": 2608\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"teams\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"wins\": 1098,\n          \"losses\": 5805,\n          \"win_pct\": 2526.418065377091,\n          \"rank\": 3088\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"wins\": 7717,\n          \"losses\": 8838,\n          \"win_pct\": 6319.122383529005,\n          \"rank\": 7231\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58ccae20-0577-45d5-8256-486b816ec31d",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "seasons",
+                    ":season_year",
+                    "REG",
+                    "standings.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "season_year",
+                      "description": "(Required) The season year (e.g., 2024)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8dac2b8b-ad9f-4afd-a76d-860a8e9e666d",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "seasons",
+                    ":season_year",
+                    "REG",
+                    "standings.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "season_year",
+                      "description": "(Required) The season year (e.g., 2024)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sportradar.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ebfbe59b-5dc8-4f50-80cf-b82b6ff9b9be",
+    "name": "Sportradar Push Feeds Competitors Standings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.\n\nContact Support:\n Name: Sportradar Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

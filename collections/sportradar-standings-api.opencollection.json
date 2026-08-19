@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sportradar Push Feeds Competitors Standings API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Standings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NBA Standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sportradar.com/nba/trial/v8/en/seasons/:season_year/REG/standings.json",
+            "params": [
+              {
+                "name": "season_year",
+                "value": "",
+                "type": "path",
+                "description": "The season year (e.g., 2024)."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Sportradar API key."
+              }
+            ]
+          },
+          "docs": "Returns current NBA standings for the specified season, including wins, losses, win percentage, conference and division rankings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

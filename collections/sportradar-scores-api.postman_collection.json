@@ -1,0 +1,925 @@
+{
+  "item": [
+    {
+      "id": "7ec62b8b-c0f8-4b40-9418-2987582a1aef",
+      "name": "Scores",
+      "description": {
+        "content": "Access live and historical game scores and match results.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "80867e07-48fb-4789-904b-c3b84316d2fe",
+          "name": "Get NBA Game Summary",
+          "request": {
+            "name": "Get NBA Game Summary",
+            "description": {
+              "content": "Returns a complete summary of an NBA game including box score, team statistics, player statistics, and period-by-period scoring. Available for both completed and live games.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nba",
+                "trial",
+                "v8",
+                "en",
+                "games",
+                ":game_id",
+                "summary.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Sportradar API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "game_id",
+                  "description": "(Required) The unique identifier for the NBA game."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64c42d7a-f3f9-4356-9865-8010a205b9ed",
+              "name": "Successful response containing NBA game summary data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NBA game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"closed\",\n  \"scheduled\": \"2012-08-03T15:48:30.862Z\",\n  \"home\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"alias\": \"string\",\n    \"points\": 1801\n  },\n  \"away\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"alias\": \"string\",\n    \"points\": 1827\n  },\n  \"venue\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"capacity\": 1127\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0871d532-ce4e-4856-ab13-a5e8707ce235",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NBA game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d7b1c06-cbe1-4781-a925-289d7f125b48",
+              "name": "Game not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NBA game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02a940d9-524d-4db5-bd46-3916ab13bd62",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nba",
+                    "trial",
+                    "v8",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NBA game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "031a42d7-e705-43d2-b721-079a6633a278",
+          "name": "Get Soccer Match Summary",
+          "request": {
+            "name": "Get Soccer Match Summary",
+            "description": {
+              "content": "Returns a detailed summary of a soccer match including match timeline, scoreline, statistics, lineups, and incident data (goals, cards, substitutions).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "soccer-t3",
+                "trial",
+                "v4",
+                "en",
+                "sport_events",
+                ":sport_event_id",
+                "summary.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Sportradar API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport_event_id",
+                  "description": "(Required) The unique Sportradar ID for the sport event (e.g., sr:match:12345)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c26f12b-de34-48f6-87c8-b1d482cef2a4",
+              "name": "Successful response containing match summary data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "sport_events",
+                    ":sport_event_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport_event_id",
+                      "description": "(Required) The unique Sportradar ID for the sport event (e.g., sr:match:12345)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sport_event\": {\n    \"id\": \"string\",\n    \"scheduled\": \"1999-01-17T09:48:44.356Z\",\n    \"competitors\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"qualifier\": \"home\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"qualifier\": \"home\"\n      }\n    ],\n    \"venue\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"city\": \"string\",\n      \"country\": \"string\",\n      \"capacity\": 1234\n    }\n  },\n  \"sport_event_status\": {\n    \"status\": \"string\",\n    \"match_status\": \"string\",\n    \"home_score\": 2594,\n    \"away_score\": 328\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1da21bd-f32f-4b49-8b27-fdd18a36006a",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "sport_events",
+                    ":sport_event_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport_event_id",
+                      "description": "(Required) The unique Sportradar ID for the sport event (e.g., sr:match:12345)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e379ce1-18e6-46c6-a79a-daa73667cc62",
+              "name": "Sport event not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "sport_events",
+                    ":sport_event_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport_event_id",
+                      "description": "(Required) The unique Sportradar ID for the sport event (e.g., sr:match:12345)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c20508c-f78d-4ce1-af7c-fc06d3b1f64a",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "soccer-t3",
+                    "trial",
+                    "v4",
+                    "en",
+                    "sport_events",
+                    ":sport_event_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport_event_id",
+                      "description": "(Required) The unique Sportradar ID for the sport event (e.g., sr:match:12345)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bfb1478-2537-4a6d-82fd-b8fd005eddcd",
+          "name": "Get NFL Game Summary",
+          "request": {
+            "name": "Get NFL Game Summary",
+            "description": {
+              "content": "Returns a complete NFL game summary including scoring drives, team statistics, individual player statistics, and game situation data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "trial",
+                "v7",
+                "en",
+                "games",
+                ":game_id",
+                "summary.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Sportradar API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "game_id",
+                  "description": "(Required) The unique identifier for the NFL game."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c64fc619-cad6-49a5-9fcb-2198007b6a0a",
+              "name": "Successful response containing NFL game summary data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "trial",
+                    "v7",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NFL game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"closed\",\n  \"scheduled\": \"2012-08-03T15:48:30.862Z\",\n  \"home\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"alias\": \"string\",\n    \"points\": 1801\n  },\n  \"away\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"alias\": \"string\",\n    \"points\": 1827\n  },\n  \"venue\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"capacity\": 1127\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f896bc3-c785-4b3e-8ada-63d77816164b",
+              "name": "Unauthorized - invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "trial",
+                    "v7",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NFL game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b340b0a4-8b17-4fe0-be2d-7c5646bf8b55",
+              "name": "Game not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "trial",
+                    "v7",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NFL game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4bb8adcb-eb3b-44a9-a533-ae11c67d56bf",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "trial",
+                    "v7",
+                    "en",
+                    "games",
+                    ":game_id",
+                    "summary.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "game_id",
+                      "description": "(Required) The unique identifier for the NFL game."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sportradar.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1bdd97b5-0a1f-494c-8c77-3d924637bdbd",
+    "name": "Sportradar Push Feeds Competitors Scores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.\n\nContact Support:\n Name: Sportradar Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
