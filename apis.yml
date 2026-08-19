@@ -24,7 +24,7 @@ description: Sportradar is the world's leading sports technology company, provid
 url: https://raw.githubusercontent.com/api-evangelist/sportradar/refs/heads/main/apis.yml
 created: '2024-12-25'
 modified: '2026-05-29'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 type: Index
 tags:
 - Data
