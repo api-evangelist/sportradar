@@ -229,6 +229,8 @@ apis:
   description: Retrieve daily, weekly, and seasonal schedules for sports competitions.
   humanURL: https://developer.sportradar.com/
   tags:
+  - Schedule
+  tags_raw:
   - Schedules
   properties:
   - type: OpenAPI
