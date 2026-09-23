@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sportradar Push Feeds Competitors Standings API
-  description: Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.
+  title: Sportradar Sports Data Standings API
+  description: Sportradar's Sports Data API provides comprehensive access to real-time and historical sports data covering 80+ sports and 500+ leagues worldwide. The API delivers scores, statistics, standings, schedules, play-by-play data, and odds information for media companies, sportsbooks, fantasy sports platforms, and sports technology applications. All endpoints require an API key passed as a query parameter. Data is available in JSON and XML formats.
   version: v1
   contact:
     name: Sportradar Developer Support
@@ -9,7 +9,7 @@ info:
   termsOfService: https://sportradar.com/terms/
 servers:
 - url: https://api.sportradar.com
-  description: Sportradar Push Feeds Production Server
+  description: Sportradar API Production Server
 security:
 - apiKey: []
 tags:
@@ -44,30 +44,7 @@ paths:
         '429':
           description: Rate limit exceeded.
 components:
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      description: Your Sportradar API key.
-      schema:
-        type: string
   schemas:
-    ConferenceStandings:
-      type: object
-      description: Conference-level standings.
-      properties:
-        id:
-          type: string
-          description: Conference identifier.
-        name:
-          type: string
-          description: Conference name.
-        teams:
-          type: array
-          description: Teams within the conference with their records.
-          items:
-            $ref: '#/components/schemas/TeamStanding'
     TeamStanding:
       type: object
       description: A team's standing within a conference.
@@ -113,12 +90,35 @@ components:
           description: List of conferences with standings.
           items:
             $ref: '#/components/schemas/ConferenceStandings'
+    ConferenceStandings:
+      type: object
+      description: Conference-level standings.
+      properties:
+        id:
+          type: string
+          description: Conference identifier.
+        name:
+          type: string
+          description: Conference name.
+        teams:
+          type: array
+          description: Teams within the conference with their records.
+          items:
+            $ref: '#/components/schemas/TeamStanding'
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey
-      in: header
-      name: x-api-key
-      description: Sportradar Push Feeds require an API key passed in the x-api-key request header. Push entitlements are tied to Realtime customer accounts.
+      in: query
+      name: api_key
+      description: Sportradar API key passed as a query parameter. Obtain from the Sportradar developer portal.
 externalDocs:
-  description: Sportradar Push Feeds Documentation
-  url: https://developer.sportradar.com/getting-started/docs/get-started
+  description: Sportradar Developer Documentation
+  url: https://developer.sportradar.com/docs/read/Home

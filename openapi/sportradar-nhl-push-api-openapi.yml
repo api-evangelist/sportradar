@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sportradar Push Feeds Competitors NHL Push API
-  description: Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding. A single long-lived HTTP connection streams JSON-encoded events, statistics, clock updates, and draft activity for live games. When no new content is available, the server sends a heartbeat message every five seconds to keep the connection alive. Push Feeds are an add-on service available to Sportradar Realtime customers and are intended to complement, not replace, the RESTful Sports Data APIs. Clients must follow HTTP redirects and accept chunked transfer encoding. There are no documented limits on the number of concurrent connections.
+  title: Sportradar Push Feeds NHL Push API
+  description: Sportradar's Push Feeds deliver real-time sports data over HTTP using chunked transfer encoding.
   version: v1
   contact:
     name: Sportradar Developer Support
@@ -79,54 +79,6 @@ paths:
         '403':
           description: Forbidden - account is not entitled to Realtime push feeds.
 components:
-  schemas:
-    PushPayload:
-      type: object
-      description: Generic envelope describing a Push Feed payload. Each Sportradar package defines the concrete metadata and payload shape; refer to the package-specific documentation for field-level details.
-      properties:
-        metadata:
-          type: object
-          description: Feed metadata describing the package, sport, event, and sequence information for the message.
-          additionalProperties: true
-        payload:
-          type: object
-          description: Package-specific payload such as an event, statistics update, clock update, or draft activity.
-          additionalProperties: true
-    Heartbeat:
-      type: object
-      description: Heartbeat message emitted every five seconds when no new content is available on the stream. Used by clients to confirm the connection is still healthy.
-      properties:
-        heartbeat:
-          type: object
-          properties:
-            from:
-              type: integer
-              description: Start of the heartbeat window as a Unix timestamp.
-            to:
-              type: integer
-              description: End of the heartbeat window as a Unix timestamp.
-            interval:
-              type: integer
-              description: Heartbeat interval in seconds.
-              examples:
-              - 5
-            type:
-              type: string
-              description: Feed type the heartbeat is associated with.
-              examples:
-              - events
-              - statistics
-              - clock
-              - pulse
-            package:
-              type: string
-              description: Sportradar package emitting the heartbeat.
-              examples:
-              - soccer-v4
-              - nfl
-              - nba
-              - nhl
-              - wnba
   parameters:
     accessLevelParam:
       name: access_level
@@ -176,6 +128,54 @@ components:
             oneOf:
             - $ref: '#/components/schemas/Heartbeat'
             - $ref: '#/components/schemas/PushPayload'
+  schemas:
+    PushPayload:
+      type: object
+      description: Generic envelope describing a Push Feed payload. Each Sportradar package defines the concrete metadata and payload shape; refer to the package-specific documentation for field-level details.
+      properties:
+        metadata:
+          type: object
+          description: Feed metadata describing the package, sport, event, and sequence information for the message.
+          additionalProperties: true
+        payload:
+          type: object
+          description: Package-specific payload such as an event, statistics update, clock update, or draft activity.
+          additionalProperties: true
+    Heartbeat:
+      type: object
+      description: Heartbeat message emitted every five seconds when no new content is available on the stream. Used by clients to confirm the connection is still healthy.
+      properties:
+        heartbeat:
+          type: object
+          properties:
+            from:
+              type: integer
+              description: Start of the heartbeat window as a Unix timestamp.
+            to:
+              type: integer
+              description: End of the heartbeat window as a Unix timestamp.
+            interval:
+              type: integer
+              description: Heartbeat interval in seconds.
+              examples:
+              - 5
+            type:
+              type: string
+              description: Feed type the heartbeat is associated with.
+              examples:
+              - events
+              - statistics
+              - clock
+              - pulse
+            package:
+              type: string
+              description: Sportradar package emitting the heartbeat.
+              examples:
+              - soccer-v4
+              - nfl
+              - nba
+              - nhl
+              - wnba
   securitySchemes:
     apiKey:
       type: apiKey
