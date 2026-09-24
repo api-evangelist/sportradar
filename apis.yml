@@ -123,8 +123,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -152,8 +150,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -181,8 +177,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -210,8 +204,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -239,8 +231,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -266,8 +256,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -295,8 +283,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -322,8 +308,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -349,8 +333,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
@@ -377,8 +359,6 @@ apis:
     url: https://developer.sportradar.com/docs/read/Home
   - type: GettingStarted
     url: https://developer.sportradar.com/getting-started/docs/get-started
-  - type: GraphQL
-    url: graphql/sportradar-graphql.md
   - type: Documentation
     url: https://developer.sportradar.com/getting-started/docs/get-started
   - type: Documentation
