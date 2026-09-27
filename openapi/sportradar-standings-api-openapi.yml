@@ -45,29 +45,6 @@ paths:
           description: Rate limit exceeded.
 components:
   schemas:
-    TeamStanding:
-      type: object
-      description: A team's standing within a conference.
-      properties:
-        id:
-          type: string
-          description: Team identifier.
-        name:
-          type: string
-          description: Team name.
-        wins:
-          type: integer
-          description: Number of wins.
-        losses:
-          type: integer
-          description: Number of losses.
-        win_pct:
-          type: number
-          format: float
-          description: Win percentage.
-        rank:
-          type: integer
-          description: Conference rank.
     Standings:
       type: object
       description: League standings data.
@@ -105,6 +82,29 @@ components:
           description: Teams within the conference with their records.
           items:
             $ref: '#/components/schemas/TeamStanding'
+    TeamStanding:
+      type: object
+      description: A team's standing within a conference.
+      properties:
+        id:
+          type: string
+          description: Team identifier.
+        name:
+          type: string
+          description: Team name.
+        wins:
+          type: integer
+          description: Number of wins.
+        losses:
+          type: integer
+          description: Number of losses.
+        win_pct:
+          type: number
+          format: float
+          description: Win percentage.
+        rank:
+          type: integer
+          description: Conference rank.
   parameters:
     apiKeyParam:
       name: api_key

@@ -87,61 +87,7 @@ paths:
         '403':
           description: Forbidden - account is not entitled to Realtime push feeds.
 components:
-  parameters:
-    accessLevelParam:
-      name: access_level
-      in: path
-      required: true
-      description: Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'.
-      schema:
-        type: string
-        enum:
-        - trial
-        - production
-    soccerVersionParam:
-      name: version
-      in: path
-      required: true
-      description: Sportradar Soccer API version (for example, v4).
-      schema:
-        type: string
-  responses:
-    PushRedirect:
-      description: Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.
-      headers:
-        Location:
-          description: URL of the streaming origin to follow.
-          schema:
-            type: string
-            format: uri
-    PushStream:
-      description: Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.
-      headers:
-        Transfer-Encoding:
-          description: Always 'chunked' for Push Feed responses.
-          schema:
-            type: string
-            enum:
-            - chunked
-      content:
-        application/json:
-          schema:
-            oneOf:
-            - $ref: '#/components/schemas/Heartbeat'
-            - $ref: '#/components/schemas/PushPayload'
   schemas:
-    PushPayload:
-      type: object
-      description: Generic envelope describing a Push Feed payload. Each Sportradar package defines the concrete metadata and payload shape; refer to the package-specific documentation for field-level details.
-      properties:
-        metadata:
-          type: object
-          description: Feed metadata describing the package, sport, event, and sequence information for the message.
-          additionalProperties: true
-        payload:
-          type: object
-          description: Package-specific payload such as an event, statistics update, clock update, or draft activity.
-          additionalProperties: true
     Heartbeat:
       type: object
       description: Heartbeat message emitted every five seconds when no new content is available on the stream. Used by clients to confirm the connection is still healthy.
@@ -177,6 +123,60 @@ components:
               - nba
               - nhl
               - wnba
+    PushPayload:
+      type: object
+      description: Generic envelope describing a Push Feed payload. Each Sportradar package defines the concrete metadata and payload shape; refer to the package-specific documentation for field-level details.
+      properties:
+        metadata:
+          type: object
+          description: Feed metadata describing the package, sport, event, and sequence information for the message.
+          additionalProperties: true
+        payload:
+          type: object
+          description: Package-specific payload such as an event, statistics update, clock update, or draft activity.
+          additionalProperties: true
+  responses:
+    PushRedirect:
+      description: Push Feed subscriptions begin with an HTTP redirect to the streaming origin. Clients must follow the redirect within one minute of the initial request.
+      headers:
+        Location:
+          description: URL of the streaming origin to follow.
+          schema:
+            type: string
+            format: uri
+    PushStream:
+      description: Successful subscription. The server returns an open HTTP connection with Transfer-Encoding chunked and continuously emits JSON messages. Heartbeat messages are emitted every five seconds when no other content is available.
+      headers:
+        Transfer-Encoding:
+          description: Always 'chunked' for Push Feed responses.
+          schema:
+            type: string
+            enum:
+            - chunked
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/Heartbeat'
+            - $ref: '#/components/schemas/PushPayload'
+  parameters:
+    soccerVersionParam:
+      name: version
+      in: path
+      required: true
+      description: Sportradar Soccer API version (for example, v4).
+      schema:
+        type: string
+    accessLevelParam:
+      name: access_level
+      in: path
+      required: true
+      description: Sportradar access level for the requested package. Trial accounts use 'trial'; production customers use 'production'.
+      schema:
+        type: string
+        enum:
+        - trial
+        - production
   securitySchemes:
     apiKey:
       type: apiKey
