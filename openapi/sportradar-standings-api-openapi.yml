@@ -44,29 +44,15 @@ paths:
         '429':
           description: Rate limit exceeded.
 components:
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
   schemas:
-    Standings:
-      type: object
-      description: League standings data.
-      properties:
-        season:
-          type: object
-          description: Season metadata.
-          properties:
-            id:
-              type: string
-              description: Season identifier.
-            year:
-              type: integer
-              description: Season year.
-            type:
-              type: string
-              description: Season type (REG, PST, PRE).
-        conferences:
-          type: array
-          description: List of conferences with standings.
-          items:
-            $ref: '#/components/schemas/ConferenceStandings'
     ConferenceStandings:
       type: object
       description: Conference-level standings.
@@ -105,14 +91,28 @@ components:
         rank:
           type: integer
           description: Conference rank.
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      description: Your Sportradar API key.
-      schema:
-        type: string
+    Standings:
+      type: object
+      description: League standings data.
+      properties:
+        season:
+          type: object
+          description: Season metadata.
+          properties:
+            id:
+              type: string
+              description: Season identifier.
+            year:
+              type: integer
+              description: Season year.
+            type:
+              type: string
+              description: Season type (REG, PST, PRE).
+        conferences:
+          type: array
+          description: List of conferences with standings.
+          items:
+            $ref: '#/components/schemas/ConferenceStandings'
   securitySchemes:
     apiKey:
       type: apiKey

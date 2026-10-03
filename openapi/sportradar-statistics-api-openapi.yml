@@ -45,6 +45,14 @@ paths:
         '429':
           description: Rate limit exceeded.
 components:
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
   schemas:
     Competition:
       type: object
@@ -66,14 +74,6 @@ components:
             name:
               type: string
               description: Category name (e.g., England).
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      description: Your Sportradar API key.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey
