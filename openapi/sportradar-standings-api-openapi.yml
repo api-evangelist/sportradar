@@ -44,30 +44,29 @@ paths:
         '429':
           description: Rate limit exceeded.
 components:
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      description: Your Sportradar API key.
-      schema:
-        type: string
   schemas:
-    ConferenceStandings:
+    Standings:
       type: object
-      description: Conference-level standings.
+      description: League standings data.
       properties:
-        id:
-          type: string
-          description: Conference identifier.
-        name:
-          type: string
-          description: Conference name.
-        teams:
+        season:
+          type: object
+          description: Season metadata.
+          properties:
+            id:
+              type: string
+              description: Season identifier.
+            year:
+              type: integer
+              description: Season year.
+            type:
+              type: string
+              description: Season type (REG, PST, PRE).
+        conferences:
           type: array
-          description: Teams within the conference with their records.
+          description: List of conferences with standings.
           items:
-            $ref: '#/components/schemas/TeamStanding'
+            $ref: '#/components/schemas/ConferenceStandings'
     TeamStanding:
       type: object
       description: A team's standing within a conference.
@@ -91,28 +90,29 @@ components:
         rank:
           type: integer
           description: Conference rank.
-    Standings:
+    ConferenceStandings:
       type: object
-      description: League standings data.
+      description: Conference-level standings.
       properties:
-        season:
-          type: object
-          description: Season metadata.
-          properties:
-            id:
-              type: string
-              description: Season identifier.
-            year:
-              type: integer
-              description: Season year.
-            type:
-              type: string
-              description: Season type (REG, PST, PRE).
-        conferences:
+        id:
+          type: string
+          description: Conference identifier.
+        name:
+          type: string
+          description: Conference name.
+        teams:
           type: array
-          description: List of conferences with standings.
+          description: Teams within the conference with their records.
           items:
-            $ref: '#/components/schemas/ConferenceStandings'
+            $ref: '#/components/schemas/TeamStanding'
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

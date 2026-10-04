@@ -45,6 +45,14 @@ paths:
         '429':
           description: Rate limit exceeded.
 components:
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
   schemas:
     TeamRef:
       type: object
@@ -87,14 +95,6 @@ components:
         experience:
           type: string
           description: Player experience level.
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      description: Your Sportradar API key.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

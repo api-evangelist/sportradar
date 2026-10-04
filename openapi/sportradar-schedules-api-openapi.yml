@@ -53,6 +53,51 @@ components:
       schema:
         type: string
   schemas:
+    Venue:
+      type: object
+      description: The venue where a game or match takes place.
+      properties:
+        id:
+          type: string
+          description: Unique venue identifier.
+        name:
+          type: string
+          description: Venue name.
+        city:
+          type: string
+          description: City where the venue is located.
+        country:
+          type: string
+          description: Country where the venue is located.
+        capacity:
+          type: integer
+          description: Seating capacity of the venue.
+    TeamRef:
+      type: object
+      description: Reference to a team.
+      properties:
+        id:
+          type: string
+          description: Unique team identifier.
+        name:
+          type: string
+          description: Team name.
+        alias:
+          type: string
+          description: Team abbreviation.
+    DailySchedule:
+      type: object
+      description: Schedule of games for a specific date.
+      properties:
+        date:
+          type: string
+          format: date
+          description: The schedule date.
+        games:
+          type: array
+          description: List of scheduled games for the date.
+          items:
+            $ref: '#/components/schemas/ScheduledGame'
     ScheduledGame:
       type: object
       description: Basic information about a scheduled game.
@@ -73,51 +118,6 @@ components:
           $ref: '#/components/schemas/TeamRef'
         venue:
           $ref: '#/components/schemas/Venue'
-    Venue:
-      type: object
-      description: The venue where a game or match takes place.
-      properties:
-        id:
-          type: string
-          description: Unique venue identifier.
-        name:
-          type: string
-          description: Venue name.
-        city:
-          type: string
-          description: City where the venue is located.
-        country:
-          type: string
-          description: Country where the venue is located.
-        capacity:
-          type: integer
-          description: Seating capacity of the venue.
-    DailySchedule:
-      type: object
-      description: Schedule of games for a specific date.
-      properties:
-        date:
-          type: string
-          format: date
-          description: The schedule date.
-        games:
-          type: array
-          description: List of scheduled games for the date.
-          items:
-            $ref: '#/components/schemas/ScheduledGame'
-    TeamRef:
-      type: object
-      description: Reference to a team.
-      properties:
-        id:
-          type: string
-          description: Unique team identifier.
-        name:
-          type: string
-          description: Team name.
-        alias:
-          type: string
-          description: Team abbreviation.
   securitySchemes:
     apiKey:
       type: apiKey

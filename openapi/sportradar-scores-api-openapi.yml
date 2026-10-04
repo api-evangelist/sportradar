@@ -101,65 +101,15 @@ paths:
         '429':
           description: Rate limit exceeded.
 components:
+  parameters:
+    apiKeyParam:
+      name: api_key
+      in: query
+      required: true
+      description: Your Sportradar API key.
+      schema:
+        type: string
   schemas:
-    SportEventSummary:
-      type: object
-      description: Summary of a soccer match including scoreline and incidents.
-      properties:
-        sport_event:
-          $ref: '#/components/schemas/SportEvent'
-        sport_event_status:
-          $ref: '#/components/schemas/SportEventStatus'
-    SportEvent:
-      type: object
-      description: Core sport event data.
-      properties:
-        id:
-          type: string
-          description: Unique Sportradar sport event identifier.
-        scheduled:
-          type: string
-          format: date-time
-          description: Scheduled start time.
-        competitors:
-          type: array
-          description: List of competing teams or players.
-          items:
-            $ref: '#/components/schemas/Competitor'
-        venue:
-          $ref: '#/components/schemas/Venue'
-    TeamScore:
-      type: object
-      description: Team score and identity within a game.
-      properties:
-        id:
-          type: string
-          description: Unique Sportradar team identifier.
-        name:
-          type: string
-          description: Full team name.
-        alias:
-          type: string
-          description: Team abbreviation.
-        points:
-          type: integer
-          description: Total points scored.
-    SportEventStatus:
-      type: object
-      description: Current status and score of a sport event.
-      properties:
-        status:
-          type: string
-          description: Current status of the sport event.
-        match_status:
-          type: string
-          description: Detailed match status (not_started, live, ended).
-        home_score:
-          type: integer
-          description: Home team score.
-        away_score:
-          type: integer
-          description: Away team score.
     Venue:
       type: object
       description: The venue where a game or match takes place.
@@ -179,6 +129,30 @@ components:
         capacity:
           type: integer
           description: Seating capacity of the venue.
+    SportEventSummary:
+      type: object
+      description: Summary of a soccer match including scoreline and incidents.
+      properties:
+        sport_event:
+          $ref: '#/components/schemas/SportEvent'
+        sport_event_status:
+          $ref: '#/components/schemas/SportEventStatus'
+    SportEventStatus:
+      type: object
+      description: Current status and score of a sport event.
+      properties:
+        status:
+          type: string
+          description: Current status of the sport event.
+        match_status:
+          type: string
+          description: Detailed match status (not_started, live, ended).
+        home_score:
+          type: integer
+          description: Home team score.
+        away_score:
+          type: integer
+          description: Away team score.
     Competitor:
       type: object
       description: A team or player competing in a sport event.
@@ -195,6 +169,40 @@ components:
           enum:
           - home
           - away
+    TeamScore:
+      type: object
+      description: Team score and identity within a game.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar team identifier.
+        name:
+          type: string
+          description: Full team name.
+        alias:
+          type: string
+          description: Team abbreviation.
+        points:
+          type: integer
+          description: Total points scored.
+    SportEvent:
+      type: object
+      description: Core sport event data.
+      properties:
+        id:
+          type: string
+          description: Unique Sportradar sport event identifier.
+        scheduled:
+          type: string
+          format: date-time
+          description: Scheduled start time.
+        competitors:
+          type: array
+          description: List of competing teams or players.
+          items:
+            $ref: '#/components/schemas/Competitor'
+        venue:
+          $ref: '#/components/schemas/Venue'
     GameSummary:
       type: object
       description: Summary data for a completed or live sports game including teams, scores, and statistics.
@@ -221,14 +229,6 @@ components:
           $ref: '#/components/schemas/TeamScore'
         venue:
           $ref: '#/components/schemas/Venue'
-  parameters:
-    apiKeyParam:
-      name: api_key
-      in: query
-      required: true
-      description: Your Sportradar API key.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey
