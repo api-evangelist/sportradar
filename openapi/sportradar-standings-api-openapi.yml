@@ -45,6 +45,21 @@ paths:
           description: Rate limit exceeded.
 components:
   schemas:
+    ConferenceStandings:
+      type: object
+      description: Conference-level standings.
+      properties:
+        id:
+          type: string
+          description: Conference identifier.
+        name:
+          type: string
+          description: Conference name.
+        teams:
+          type: array
+          description: Teams within the conference with their records.
+          items:
+            $ref: '#/components/schemas/TeamStanding'
     Standings:
       type: object
       description: League standings data.
@@ -90,21 +105,6 @@ components:
         rank:
           type: integer
           description: Conference rank.
-    ConferenceStandings:
-      type: object
-      description: Conference-level standings.
-      properties:
-        id:
-          type: string
-          description: Conference identifier.
-        name:
-          type: string
-          description: Conference name.
-        teams:
-          type: array
-          description: Teams within the conference with their records.
-          items:
-            $ref: '#/components/schemas/TeamStanding'
   parameters:
     apiKeyParam:
       name: api_key
